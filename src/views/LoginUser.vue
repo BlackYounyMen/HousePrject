@@ -35,7 +35,7 @@
       </div>
       <!--这里有条件的话，建议做成二维码登录-->
       <div class="div-description">
-        <img src="../Pic/1.jpg" alt="" /><span>更多咨询可扫码观看~</span>
+        <img src="../Pic/1.jpg" alt="" /><span>更多咨询可扫码观看666~</span>
       </div>
       <!--这里有条件的话，建议做成二维码登录结束-->
     </div>
