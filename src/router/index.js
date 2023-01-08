@@ -14,7 +14,13 @@ const routes = [
     path: '/ConTian',
     name: 'ConTian',
     component: () => import('../views/ConTian.vue')
+  },
+  {
+    path: '/CustomerEntry',
+    name: 'CustomerEntry',
+    component: () => import('../views/CustomerEntry.vue')
   }
+
 ]
 
 const router = new VueRouter({
