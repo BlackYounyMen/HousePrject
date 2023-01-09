@@ -13,13 +13,16 @@ const routes = [
   {
     path: '/ConTian',
     name: 'ConTian',
-    component: () => import('../views/ConTian.vue')
+    component: () => import('../views/ConTian.vue'),
+    children: [
+      {
+        path: '/CustomerEntry',
+        name: 'CustomerEntry',
+        component: () => import('../views/CustomerEntry.vue')
+      }
+    ]
   },
-  {
-    path: '/CustomerEntry',
-    name: 'CustomerEntry',
-    component: () => import('../views/CustomerEntry.vue')
-  }
+
 
 ]
 

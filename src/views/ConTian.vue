@@ -10,6 +10,7 @@
             background-color="#545c64"
             text-color="#fff"
             active-text-color="#ffd04b"
+            :router="true"
           >
             <!-- 一级菜单 -->
             <template v-for="item in list">
@@ -81,65 +82,78 @@
 export default {
   data() {
     return {
-      list: [
-        {
-          path: "/1",
-          name: "导航一",
-          icon: "el-icon-menu",
-          children: [
-            {
-              path: "/1/1",
-              name: "导航1-1",
-              icon: "el-icon-menu",
-              children: [
-                {
-                  path: "/1/1/1",
-                  name: "导航1-1-1",
-                  icon: "el-icon-menu",
-                },
-                {
-                  path: "/1/1/2",
-                  name: "导航1-1-2",
-                  icon: "el-icon-menu",
-                },
-                {
-                  path: "/1/1/3",
-                  name: "导航1-1-3",
-                  icon: "el-icon-menu",
-                },
-              ],
-            },
-            {
-              path: "/1/2",
-              name: "导航1-2",
-              icon: "el-icon-menu",
-              children: [
-                {
-                  path: "/1/1/1",
-                  name: "导航1-1-1",
-                  icon: "el-icon-menu",
-                },
-                {
-                  path: "/1/1/2",
-                  name: "导航1-1-2",
-                  icon: "el-icon-menu",
-                },
-                {
-                  path: "/1/1/3",
-                  name: "导航1-1-3",
-                  icon: "el-icon-menu",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          path: "/2",
-          name: "导航二",
-          icon: "el-icon-menu",
-        },
-      ],
+      list: [],
+      // list: [
+      //   {
+      //     path: "/1",
+      //     name: "导航一",
+      //     icon: "el-icon-menu",
+      //     children: [
+      //       {
+      //         path: "/1/1",
+      //         name: "导航1-1",
+      //         icon: "el-icon-menu",
+      //         children: [
+      //           {
+      //             path: "/1/1/1",
+      //             name: "导航1-1-1",
+      //             icon: "el-icon-menu",
+      //           },
+      //           {
+      //             path: "/1/1/2",
+      //             name: "导航1-1-2",
+      //             icon: "el-icon-menu",
+      //           },
+      //           {
+      //             path: "/1/1/3",
+      //             name: "导航1-1-3",
+      //             icon: "el-icon-menu",
+      //           },
+      //         ],
+      //       },
+      //       {
+      //         path: "/1/2",
+      //         name: "导航1-2",
+      //         icon: "el-icon-menu",
+      //         children: [
+      //           {
+      //             path: "/1/1/1",
+      //             name: "导航1-1-1",
+      //             icon: "el-icon-menu",
+      //           },
+      //           {
+      //             path: "/1/1/2",
+      //             name: "导航1-1-2",
+      //             icon: "el-icon-menu",
+      //           },
+      //           {
+      //             path: "/1/1/3",
+      //             name: "导航1-1-3",
+      //             icon: "el-icon-menu",
+      //           },
+      //         ],
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     path: "/2",
+      //     name: "导航二",
+      //     icon: "el-icon-menu",
+      //   },
+      // ],
     };
+  },
+  methods: {
+    GetMenu() {
+      this.axios
+        .get("https://localhost:44360/api/Login/GetMenu")
+        .then((res) => {
+          this.list = res.data;
+        });
+    },
+  },
+  created() {
+    this.GetMenu();
   },
 };
 </script>
