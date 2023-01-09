@@ -19,6 +19,23 @@ const routes = [
         path: '/CustomerEntry',
         name: 'CustomerEntry',
         component: () => import('../views/CustomerEntry.vue')
+      },
+      {
+        path: '/PermissionsView',
+        name: 'PermissionsView',
+        component: () => import('../views/Rbac/PermissionsView.vue')
+      }
+      ,
+      {
+        path: '/RoleShow',
+        name: 'RoleShow',
+        component: () => import('../views/Rbac/RoleShow.vue')
+      }
+      ,
+      {
+        path: '/UserShow',
+        name: 'UserShow',
+        component: () => import('../views/Rbac/UserShow.vue')
       }
     ]
   },

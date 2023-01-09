@@ -66,6 +66,9 @@
                 ><span slot="title">{{ item.name }}</span></el-menu-item
               >
             </template>
+            <!--这里开始进行数据测试的操作-->
+            <el-menu-item index="/PermissionsView">数据测试开始</el-menu-item>
+            <!--这里开始进行数据测试的操作结束-->
           </el-menu>
           <!--左侧菜单栏显示结束-->
         </el-aside>
