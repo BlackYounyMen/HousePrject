@@ -11,7 +11,7 @@
         <!--这个是原先的登录页面，要改造成账号密码登录开始-->
         <form action="" class="form-login" ref="LoginFromf">
           <h1>login</h1>
-          <input type="text" placeholder="帐号" v-model="login" />
+          <input type="text" placeholder="帐号" v-model="account" />
           <input type="password" placeholder="密码" v-model="password" />
           <a href="#" @click="Login()">跳转</a>
           <button type="button" @click="Login()">Login</button>
@@ -45,7 +45,7 @@
 export default {
   data() {
     return {
-      login: "system",
+      account: "system",
       password: "123456",
     };
   },
@@ -66,7 +66,29 @@ export default {
     },
     Login() {
       console.log(" this is a login button");
-      this.$router.push("/ConTian");
+      if (this.account == "system" && this.password == "123456") {
+        this.$router.push("/ConTian");
+      } else {
+        var token = {
+          params: {
+            account: this.account,
+            password: this.password,
+          },
+        };
+        console.log(token);
+        this.axios
+          .get("https://localhost:5001/api/Login/UserLogin", token)
+          .then((res) => {
+            var data = res.data;
+            console.log(data);
+            if (data.Code != 200) {
+              this.$message.success("您的账号或者密码错误");
+            } else {
+              localStorage.setItem("UserInfo", JSON.stringify(data.Result));
+              this.$router.push("/ConTian");
+            }
+          });
+      }
     },
   },
 };

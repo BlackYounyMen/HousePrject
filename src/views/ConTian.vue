@@ -67,7 +67,9 @@
               >
             </template>
             <!--这里开始进行数据测试的操作-->
-            <el-menu-item index="/PermissionsView">数据测试开始</el-menu-item>
+            <!-- <el-menu-item index="/PermissionsView">权限测试</el-menu-item>
+            <el-menu-item index="/RoleShow">角色测试</el-menu-item>
+            <el-menu-item index="/UserShow">人员测试</el-menu-item> -->
             <!--这里开始进行数据测试的操作结束-->
           </el-menu>
           <!--左侧菜单栏显示结束-->
@@ -86,73 +88,13 @@ export default {
   data() {
     return {
       list: [],
-      // list: [
-      //   {
-      //     path: "/1",
-      //     name: "导航一",
-      //     icon: "el-icon-menu",
-      //     children: [
-      //       {
-      //         path: "/1/1",
-      //         name: "导航1-1",
-      //         icon: "el-icon-menu",
-      //         children: [
-      //           {
-      //             path: "/1/1/1",
-      //             name: "导航1-1-1",
-      //             icon: "el-icon-menu",
-      //           },
-      //           {
-      //             path: "/1/1/2",
-      //             name: "导航1-1-2",
-      //             icon: "el-icon-menu",
-      //           },
-      //           {
-      //             path: "/1/1/3",
-      //             name: "导航1-1-3",
-      //             icon: "el-icon-menu",
-      //           },
-      //         ],
-      //       },
-      //       {
-      //         path: "/1/2",
-      //         name: "导航1-2",
-      //         icon: "el-icon-menu",
-      //         children: [
-      //           {
-      //             path: "/1/1/1",
-      //             name: "导航1-1-1",
-      //             icon: "el-icon-menu",
-      //           },
-      //           {
-      //             path: "/1/1/2",
-      //             name: "导航1-1-2",
-      //             icon: "el-icon-menu",
-      //           },
-      //           {
-      //             path: "/1/1/3",
-      //             name: "导航1-1-3",
-      //             icon: "el-icon-menu",
-      //           },
-      //         ],
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     path: "/2",
-      //     name: "导航二",
-      //     icon: "el-icon-menu",
-      //   },
-      // ],
     };
   },
   methods: {
     GetMenu() {
-      this.axios
-        .get("https://localhost:44360/api/Login/GetMenu")
-        .then((res) => {
-          this.list = res.data;
-        });
+      this.axios.get("https://localhost:5001/api/Power/GetMenu").then((res) => {
+        this.list = res.data;
+      });
     },
   },
   created() {
@@ -172,7 +114,7 @@ export default {
 .el-aside {
   background-color: #d3dce6;
   color: #333;
-  text-align: center;
+  text-align: left;
   line-height: 200px;
   height: 800px;
 }
@@ -181,7 +123,7 @@ export default {
   background-color: #e9eef3;
   color: #333;
   text-align: center;
-  line-height: 160px;
+  line-height: 10px;
 }
 
 body > .el-container {
