@@ -28,6 +28,15 @@
         >
         </el-switch>
       </el-form-item>
+      <el-form-item label="图标">
+        <el-select v-model="sizeForm.icon" placeholder="请选择图标">
+          <el-option v-for="val in iconList" :key="val" :value="val">
+            <i :class="val"
+              ><span>{{ val }}</span></i
+            >
+          </el-option>
+        </el-select>
+      </el-form-item>
 
       <el-form-item size="large">
         <el-button type="primary" @click="onSubmit()">修改数据</el-button>
@@ -37,6 +46,7 @@
   </div>
 </template>
 <script>
+import icon from "../../JSON/icon";
 export default {
   props: ["id"],
   data() {
@@ -53,9 +63,15 @@ export default {
         orderId: this.value == false ? 0 : 1,
       },
       Selectitem: [],
+      iconList: [],
     };
   },
   methods: {
+    IconLoad() {
+      for (let a of icon) {
+        this.iconList.push(a);
+      }
+    },
     Recoil() {
       this.axios
         .get(`https://localhost:5001/api/Power/Recoil?id=${this.id}`)
@@ -68,6 +84,7 @@ export default {
             superiorId: d.SuperiorId,
             url: d.Url,
             orderId: d.OrderId,
+            icon: d.Icon,
           };
           this.value = d.OrderId == 0 ? false : true;
         });
@@ -102,6 +119,7 @@ export default {
   },
   created() {
     this.SelectitemShow();
+    this.IconLoad();
     this.Recoil();
   },
 };

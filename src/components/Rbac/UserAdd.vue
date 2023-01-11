@@ -2,44 +2,53 @@
   <div>
     <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
       <el-form-item label="人力资源">
-        <el-select v-model="sizeForm.HumanId" placeholder="请选择活动区域">
+        <el-select v-model="sizeForm.humanId" placeholder="请选择活动区域">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="姓名">
-        <el-input v-model="sizeForm.Name"></el-input>
+        <el-input v-model="sizeForm.name"></el-input>
       </el-form-item>
       <el-form-item label="账号">
-        <el-input v-model="sizeForm.Account"></el-input>
+        <el-input v-model="sizeForm.account"></el-input>
       </el-form-item>
       <el-form-item label="密码">
-        <el-input v-model="sizeForm.Pwd"></el-input>
+        <el-input v-model="sizeForm.pwd" type="password"></el-input>
       </el-form-item>
 
-      <el-form-item label="部门id">
-        <el-select v-model="sizeForm.ClassId" placeholder="请选择活动区域">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
+      <el-form-item label="部门">
+        <el-select v-model="sizeForm.classId" placeholder="请选择活动区域">
+          <el-option label="区域一" value="0"></el-option>
+          <el-option label="区域二" value="1"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="在职状态">
-        <el-radio v-model="State" label="在职" value="在职"></el-radio>
-        <el-radio v-model="State" label="离职" value="离职"></el-radio>
+        <el-radio
+          v-model="sizeForm.onlineState"
+          label="在职"
+          value="1"
+        ></el-radio>
+        <el-radio
+          v-model="sizeForm.onlineState"
+          label="离职"
+          value="2"
+        ></el-radio>
       </el-form-item>
       <el-form-item label="头像">
         <el-upload
-          class="upload-demo"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :on-preview="handlePreview"
-          :on-remove="handleRemove"
-          :before-remove="beforeRemove"
-          multiple
-          :limit="3"
-          :on-exceed="handleExceed"
-          :file-list="fileList"
+          class="avatar-uploader"
+          action="https://localhost:5001/api/Personnel/FileLoad"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
         >
-          <el-button size="small" type="primary">点击上传</el-button>
+          <img
+            v-if="imageUrl"
+            :src="imageUrl"
+            class="avatar"
+            style="wdth: 180px; height: 60px"
+          />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
 
@@ -54,29 +63,38 @@
 export default {
   data() {
     return {
+      imageUrl: "",
       sizeForm: {
-        Name: "",
-        HumanId: "",
-        Account: "",
-        Pwd: "",
-        ClassId: "",
-        State: "",
+        humanId: "",
+        name: "",
+        account: "",
+        pwd: "",
+        classId: 0,
+        onlineState: "",
+        handIcon: "",
       },
     };
   },
   methods: {
     onSubmit() {
-      // this.sizeForm.Name
-      // this.sizeForm.HumanId
-      // this.sizeForm.Account
-      // this.sizeForm.Pwd
-      // this.sizeForm.ClassId
-      // this.sizeForm.State
-      //   this.axios.post("").then((res) => {
-      //     var i = res.data;
-      //   });
-      console.log("submit!");
-      this.$emit("Success", "数据传输");
+      this.axios
+        .post("https://localhost:5001/api/Personnel/CreateAdd", this.sizeForm)
+        .then((res) => {
+          var state = res.data;
+          if (state == true) {
+            this.$emit("Success", "数据传输");
+          } else {
+            this.$message({
+              showClose: true,
+              message: "你的数据填写有误",
+            });
+          }
+        });
+    },
+    handleAvatarSuccess(val) {
+      console.log(val);
+      this.imageUrl = val;
+      this.sizeForm.handIcon = val;
     },
   },
 };

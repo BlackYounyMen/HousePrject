@@ -19,19 +19,19 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"> </el-table-column>
-      <el-table-column prop="HumanId" label="人力资源Id" width="180">
+      <el-table-column prop="HumanId" label="人力资源Id" width="120">
       </el-table-column>
-      <el-table-column prop="Name" label="姓名" width="180"> </el-table-column>
-      <el-table-column prop="Account" label="账号" width="180">
+      <el-table-column prop="Name" label="姓名" width="140"> </el-table-column>
+      <el-table-column prop="Account" label="账号" width="120">
       </el-table-column>
-      <el-table-column prop="Pwd" label="密码" width="180">
+      <el-table-column prop="Pwd" label="密码" width="120">
         <template slot-scope="scope">
           <span v-for="item in scope.row.Pwd.length" :key="item">*</span>
         </template>
       </el-table-column>
-      <el-table-column prop="ClassId" label="部门" width="180">
+      <el-table-column prop="ClassId" label="部门" width="120">
       </el-table-column>
-      <el-table-column prop="OnlineState" label="OnlineState" width="180">
+      <el-table-column prop="OnlineState" label="OnlineState" width="120">
       </el-table-column>
       <el-table-column prop="HandIcon" label="头像" width="180">
         <template slot-scope="scope">
@@ -47,7 +47,7 @@
             >删除</el-button
           >
           <el-button @click="Plan(scope.row)" type="text" size="small"
-            >分配权限</el-button
+            >分配角色</el-button
           >
         </template>
       </el-table-column>
@@ -168,7 +168,7 @@ export default {
     //修改滑块状态值
     EditState(val) {
       this.axios
-        .post(`https://localhost:5001/api/Role/EditState?id=${val}`)
+        .post(`https://localhost:5001/api/Personnel/EditState?id=${val}`)
         .then((res) => {
           var data = res.data;
           if (data == true) {
@@ -209,7 +209,7 @@ export default {
       })
         .then(() => {
           this.axios
-            .post("https://localhost:5001/api/Role/Delete", list)
+            .post("https://localhost:5001/api/Personnel/Delete", list)
             .then((res) => {
               var state = res.data;
               if (state == true) {
@@ -247,7 +247,7 @@ export default {
       })
         .then(() => {
           this.axios
-            .post("https://localhost:5001/api/Role/Delete", list)
+            .post("https://localhost:5001/api/Personnel/Delete", list)
             .then((res) => {
               var state = res.data;
               if (state == true) {

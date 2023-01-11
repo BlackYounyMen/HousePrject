@@ -46,5 +46,15 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+router.beforeEach((to, from, next) => {
+  var userid = localStorage.getItem("UserInfo");
+
+  if (to.name !== 'home' && userid == null) { next({ name: 'home' }) }
+  else {
+    next()
+  }
+
+})
+
 
 export default router

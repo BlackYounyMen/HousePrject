@@ -1,15 +1,20 @@
 <template >
   <div>
-    <el-tree
-      ref="tree"
-      :data="data"
-      show-checkbox
-      node-key="Id"
-      :default-checked-keys="DisPlay"
-      :props="defaultProps"
-      @check-change="handleCheckChange"
+    <div
+      v-for="(item, index) in data"
+      :key="index"
+      style="width: 320px; height: 50px"
     >
-    </el-tree>
+      <span>
+        <el-checkbox
+          v-for="item1 in item"
+          :key="item1.Id"
+          :label="item1.Id"
+          v-model="RoleList"
+          >{{ item1.RoleName }}</el-checkbox
+        ></span
+      >
+    </div>
     <el-button type="primary" size="default" @click="Save()">保存</el-button>
   </div>
 </template>
@@ -26,42 +31,46 @@ export default {
         id: "Id",
       },
       DisPlay: [],
+      RoleList: [],
       List: [],
     };
   },
   methods: {
     Recoil() {
       this.axios
-        .get(`https://localhost:5001/api/Role/RoleLoad?rid=${this.id}`)
+        .get(
+          `https://localhost:5001/api/Personnel/PersonnelLoad?rid=${this.id}`
+        )
         .then((res) => {
           for (let d of res.data) {
-            this.DisPlay.push(d.Pid);
+            this.RoleList.push(d.Id);
           }
-          console.log(this.DisPlay);
         });
     },
-    handleCheckChange() {
-      let res = this.$refs.tree.getCheckedNodes();
-      console.log(res);
-      for (let d of res) {
-        var Content = {
-          roleId: this.id,
-          powerId: d.Id,
-        };
-        this.List.push(Content);
-      }
-    },
-    handleNodeClick(data) {
-      console.log(data);
-    },
     GetAll() {
-      this.axios.get("https://localhost:5001/api/Power/GetMenu").then((res) => {
-        this.data = res.data;
+      this.axios.get("https://localhost:5001/api/Role/GetAll").then((res) => {
+        let len = res.data.Data.length;
+        let n = 4; //假设每行显示4个
+        let lineNum = len % 4 === 0 ? len / 4 : Math.floor(len / 4 + 1);
+        for (let i = 0; i < lineNum; i++) {
+          // slice() 方法返回一个从开始到结束（不包括结束）选择的数组的一部分浅拷贝到一个新数组对象。且原始数组不会被修改。
+          let temp = res.data.Data.slice(i * n, i * n + n);
+          this.data.push(temp);
+        }
       });
     },
     Save() {
+      console.log(this.RoleList);
+      for (let d of this.RoleList) {
+        var Content = {
+          personnelId: this.id,
+          roleId: d,
+        };
+        this.List.push(Content);
+      }
+      console.log(this.List);
       this.axios
-        .post("https://localhost:5001/api/Role/RPDelete", this.List)
+        .post("https://localhost:5001/api/Personnel/PRDelete", this.List)
         .then((res) => {
           var state = res.data;
           if (state == true) {
@@ -70,7 +79,8 @@ export default {
         });
     },
   },
-  created() {
+  mounted() {
+    console.log(this.id);
     this.GetAll();
     this.Recoil();
   },

@@ -65,30 +65,24 @@ export default {
       this.$refs.LoginFrom.style.transform = "none";
     },
     Login() {
-      console.log(" this is a login button");
-      if (this.account == "system" && this.password == "123456") {
-        this.$router.push("/ConTian");
-      } else {
-        var token = {
-          params: {
-            account: this.account,
-            password: this.password,
-          },
-        };
-        console.log(token);
-        this.axios
-          .get("https://localhost:5001/api/Login/UserLogin", token)
-          .then((res) => {
-            var data = res.data;
-            console.log(data);
-            if (data.Code != 200) {
-              this.$message.success("您的账号或者密码错误");
-            } else {
-              localStorage.setItem("UserInfo", JSON.stringify(data.Result));
-              this.$router.push("/ConTian");
-            }
-          });
-      }
+      var token = {
+        params: {
+          account: this.account,
+          password: this.password,
+        },
+      };
+      this.axios
+        .get("https://localhost:5001/api/Login/UserLogin", token)
+        .then((res) => {
+          var data = res.data;
+          console.log(data);
+          if (data.Code != 200) {
+            this.$message.success("您的账号或者密码错误");
+          } else {
+            localStorage.setItem("UserInfo", JSON.stringify(data.Result));
+            this.$router.push("/ConTian");
+          }
+        });
     },
   },
 };

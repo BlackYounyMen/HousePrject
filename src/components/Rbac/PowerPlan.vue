@@ -41,8 +41,9 @@ export default {
         });
     },
     handleCheckChange() {
+      this.List = [];
       let res = this.$refs.tree.getCheckedNodes();
-      console.log(res);
+
       for (let d of res) {
         var Content = {
           roleId: this.id,

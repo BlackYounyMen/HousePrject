@@ -1,9 +1,24 @@
 <template >
   <div>
     <el-container>
-      <el-header>欢迎来到房地产项目</el-header>
+      <el-header>
+        <!--表头开始-->
+        <span style="float: left">欢迎来到房地产项目</span>
+        <span style="color: red; width: 250px; float: right">
+          <el-avatar
+            shape="circle"
+            :size="50"
+            fit="cover"
+            :src="HeadIcon"
+          ></el-avatar>
+          <el-button type="primary" @click="ExitLogin()" style="float: right"
+            >退出账号</el-button
+          ></span
+        >
+        <!--表头结束-->
+      </el-header>
       <el-container>
-        <el-aside width="200px">
+        <el-aside width="275px">
           <!--左侧菜单栏显示-->
           <el-menu
             default-active="1"
@@ -88,16 +103,26 @@ export default {
   data() {
     return {
       list: [],
+      HeadIcon: "",
     };
   },
   methods: {
     GetMenu() {
-      this.axios.get("https://localhost:5001/api/Power/GetMenu").then((res) => {
-        this.list = res.data;
-      });
+      var userid = localStorage.getItem("UserInfo");
+      userid = JSON.parse(userid).Id;
+      this.axios
+        .get(`https://localhost:5001/api/Login/GetPermissions?id=${userid}`)
+        .then((res) => {
+          this.list = res.data;
+        });
+    },
+    ExitLogin() {
+      localStorage.removeItem("UserInfo");
     },
   },
   created() {
+    var userid = localStorage.getItem("UserInfo");
+    this.HeadIcon = JSON.parse(userid).HandIcon;
     this.GetMenu();
   },
 };
@@ -116,6 +141,7 @@ export default {
   color: #333;
   text-align: left;
   line-height: 200px;
+
   height: 800px;
 }
 
