@@ -6,37 +6,54 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/',  //主窗口（登录页面）
     name: 'home',
     component: HomeView
   },
   {
-    path: '/ConTian',
+    path: '/ConTian', //布局容器（登录显示完页面）
     name: 'ConTian',
     component: () => import('../views/ConTian.vue'),
     children: [
+      //#region 客户管理
       {
-        path: '/CustomerEntry',
+        path: '/CustomerEntry', // 客户信息录入
         name: 'CustomerEntry',
-        component: () => import('../views/CustomerEntry.vue')
+        component: () => import('../views/Customer/CustomerEntry.vue')
       },
       {
-        path: '/PermissionsView',
+        path: '/CustomerInfo',// 客户信息列表
+        name: 'CustomerInfo',
+        component: () => import('../views/Customer/CustomerInfo.vue')
+      },
+      //#endregion
+
+      //#region RBAC
+      {
+        path: '/PermissionsView', //权限操作
         name: 'PermissionsView',
         component: () => import('../views/Rbac/PermissionsView.vue')
-      }
-      ,
+      },
       {
-        path: '/RoleShow',
+        path: '/RoleShow', //角色操作
         name: 'RoleShow',
         component: () => import('../views/Rbac/RoleShow.vue')
       }
       ,
       {
-        path: '/UserShow',
+        path: '/UserShow', //人员操作
         name: 'UserShow',
         component: () => import('../views/Rbac/UserShow.vue')
-      }
+      },
+      //#endregion
+
+      //#region 设备管理
+      {
+        path: '/watercost', //水表
+        name: 'watercost',
+        component: () => import('../views/DeviceManagement/WaterCost.vue')
+      },
+      //#endregion
     ]
   },
 

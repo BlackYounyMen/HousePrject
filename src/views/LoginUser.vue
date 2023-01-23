@@ -13,7 +13,7 @@
           <h1>login</h1>
           <input type="text" placeholder="帐号" v-model="account" />
           <input type="password" placeholder="密码" v-model="password" />
-          <a href="#" @click="Login()">跳转</a>
+
           <button type="button" @click="Login()">Login</button>
           <div class="control">
             <span>没有帐号？<a href="#" ref="Register">Register</a></span>
@@ -45,7 +45,7 @@
 export default {
   data() {
     return {
-      account: "system",
+      account: "admin",
       password: "123456",
     };
   },
@@ -75,7 +75,6 @@ export default {
         .get("https://localhost:5001/api/Login/UserLogin", token)
         .then((res) => {
           var data = res.data;
-          console.log(data);
           if (data.Code != 200) {
             this.$message.success("您的账号或者密码错误");
           } else {
