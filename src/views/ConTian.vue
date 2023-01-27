@@ -143,7 +143,7 @@ export default {
   text-align: left;
   line-height: 200px;
 
-  height: 800px;
+  height: 900px;
 }
 
 .el-main {

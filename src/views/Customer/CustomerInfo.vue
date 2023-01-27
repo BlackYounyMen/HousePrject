@@ -49,6 +49,7 @@
       ref="table"
       @selection-change="handleSelectionChange"
     >
+      <!--配置菜单开始-->
       <el-table-column fixed type="index" align="center" :index="1">
         <template #header>
           <el-popover placement="bottom" :width="600" :visible="visible">
@@ -78,6 +79,8 @@
           </el-popover>
         </template>
       </el-table-column>
+      <!--配置菜单结束-->
+      <!--数据表格的展示，运用v-if使其实现效果-->
       <el-table-column type="selection" width="55" v-if="showColumn.select">
       </el-table-column>
       <el-table-column
@@ -111,7 +114,8 @@
       <el-table-column
         prop="address"
         label="地址"
-        minWidth="300"
+        minWidth="120"
+        maxWidth="140"
         v-if="showColumn.adreess"
       >
       </el-table-column>
@@ -131,6 +135,7 @@
         </template>
       </el-table-column>
     </el-table>
+    <!--数据表格的展示，运用v-if使其实现效果（结束）-->
     <!--分页开始-->
     <el-pagination
       @size-change="handleSizeChange"
