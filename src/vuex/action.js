@@ -12,7 +12,6 @@ export const loadWaterData = ({ commit }, data) => {
                 pageindex: data.pageindex,
                 pagesize: data.pagesize,
             },
-
         };
         axios.get("https://localhost:5001/api/Device/WaterGetData", Searth).then((res) => {
             commit('SET_Water_INFO', res.data);

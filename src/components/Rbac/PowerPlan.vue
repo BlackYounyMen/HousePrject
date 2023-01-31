@@ -37,7 +37,6 @@ export default {
           for (let d of res.data) {
             this.DisPlay.push(d.Pid);
           }
-          console.log(this.DisPlay);
         });
     },
     handleCheckChange() {

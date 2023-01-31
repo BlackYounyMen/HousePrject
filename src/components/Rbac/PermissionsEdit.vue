@@ -77,7 +77,7 @@ export default {
         .get(`https://localhost:5001/api/Power/Recoil?id=${this.id}`)
         .then((res) => {
           var d = res.data.Result;
-          console.log(d);
+
           this.sizeForm = {
             id: d.Id,
             name: d.Name,
@@ -98,7 +98,7 @@ export default {
         .post("https://localhost:5001/api/Power/Moditf", this.sizeForm)
         .then((res) => {
           var state = res.data;
-          console.log(state);
+
           if (state == true) {
             this.$emit("Success", "数据传输");
           } else {

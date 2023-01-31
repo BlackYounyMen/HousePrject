@@ -3,7 +3,16 @@
     <el-container>
       <el-header>
         <!--表头开始-->
-        <span style="float: left">欢迎来到房地产项目</span>
+        <div style="float: left" @click="Back()">
+          <img
+            src="../Pic/6453ac62-c495-4a0a-ae42-1ee74a2f42ca.png"
+            width="45px"
+            style="padding-top: 10px; float: left"
+          />
+          <div style="width: 180px; height: 60px; float: left">
+            欢迎来到房地产项目
+          </div>
+        </div>
         <span style="color: red; width: 250px; float: right">
           <el-avatar
             shape="circle"
@@ -119,6 +128,9 @@ export default {
     ExitLogin() {
       localStorage.removeItem("UserInfo");
       this.$router.push("/");
+    },
+    Back() {
+      this.$router.push("/ConTian");
     },
   },
   created() {
