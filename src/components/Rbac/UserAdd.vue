@@ -92,7 +92,6 @@ export default {
         });
     },
     handleAvatarSuccess(val) {
-      console.log(val);
       this.imageUrl = val;
       this.sizeForm.handIcon = val;
     },

@@ -143,7 +143,6 @@ export default {
     //#region 行内数据操作
     //修改方法
     Edit(val) {
-      console.log(val.Id);
       this.Fid = val.Id;
       this.EditDid = true;
     },
@@ -230,7 +229,6 @@ export default {
     },
     //弹框关闭
     DigColse(d) {
-      console.log(d);
       this.$message.success("添加成功");
       this.addDid = false;
       this.GetAll();
@@ -238,7 +236,6 @@ export default {
 
     //修改弹框关闭
     EditDigColse(d) {
-      console.log(d);
       this.$message.success("修改成功");
       this.EditDid = false;
       this.GetAll();

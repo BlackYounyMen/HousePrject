@@ -174,7 +174,6 @@ export default {
       this.loadWaterData(this.Searth);
     },
     FrontEditState(val) {
-      console.log(val);
       this.EditState(val);
       if (this.BackState == true) {
         this.$message({
@@ -191,7 +190,6 @@ export default {
     },
     //获取以及下拉框的数据
     SeeItem() {
-      console.log(this.Searth.building);
       this.ObtainSecondSelect(
         `https://localhost:5001/api/Device/GetUnitAll?id=${this.Searth.building}`
       );

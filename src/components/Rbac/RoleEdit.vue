@@ -38,7 +38,7 @@ export default {
         .get(`https://localhost:5001/api/Role/Recoil?id=${this.id}`)
         .then((res) => {
           var d = res.data.Result;
-          console.log(d);
+
           this.sizeForm = {
             id: d.Id,
             roleName: d.RoleName,

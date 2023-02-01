@@ -184,12 +184,10 @@ export default {
     //#region 行内数据操作
     //修改方法
     Edit(val) {
-      console.log(val.Id);
       this.Fid = val.Id;
       this.EditDid = true;
     },
     Plan(val) {
-      console.log(val.Id);
       this.Fid = val.Id;
       this.PlanDid = true;
     },
