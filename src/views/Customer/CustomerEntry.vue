@@ -33,12 +33,11 @@
             <el-input v-model="form.Telephone"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="11">
-          <el-form-item label="开户银行账号">
-            <el-input v-model="form.BankAccount"></el-input>
-          </el-form-item>
-        </el-col>
+        <el-col :span="11"> </el-col>
       </el-row>
+      <br />
+      <br />
+
       <el-row :span="22">
         <el-col :span="11">
           <el-form-item label="开户银行名称">
@@ -90,7 +89,11 @@
             <el-input v-model="form.TaxpayerNum"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="11"> </el-col>
+        <el-col :span="11">
+          <el-form-item label="开户银行账号">
+            <el-input v-model="form.BankAccount"></el-input>
+          </el-form-item>
+        </el-col>
       </el-row>
 
       <el-form-item>
