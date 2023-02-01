@@ -224,4 +224,8 @@ export default {
 .div-form .control a:hover {
   color: #000;
 }
+
+body {
+  margin: 0px;
+}
 </style>
