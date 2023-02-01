@@ -101,11 +101,27 @@
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
+    <!--这是弹窗的开始-->
+    <el-dialog
+      title="添加甲方负责人"
+      :visible.sync="addDid"
+      v-if="addDid"
+      width="50%"
+    >
+      <span>
+        <Diglist @Success="DigColse"></Diglist>
+      </span>
+      <span slot="footer"> </span>
+    </el-dialog>
+
+    <!--这是弹窗的结束-->
   </div>
 </template>
 
 <script>
+import Diglist from "../../components/Customer/CustomerAdd.vue";
 export default {
+  components: { Diglist },
   data() {
     return {
       form: {
