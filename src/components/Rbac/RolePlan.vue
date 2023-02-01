@@ -60,7 +60,6 @@ export default {
       });
     },
     Save() {
-      console.log(this.RoleList);
       for (let d of this.RoleList) {
         var Content = {
           personnelId: this.id,
@@ -68,7 +67,7 @@ export default {
         };
         this.List.push(Content);
       }
-      console.log(this.List);
+
       this.axios
         .post("https://localhost:5001/api/Personnel/PRDelete", this.List)
         .then((res) => {
@@ -80,7 +79,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.id);
     this.GetAll();
     this.Recoil();
   },

@@ -229,12 +229,8 @@ export default {
     }
   },
   methods: {
-    handleSelectionChange(val) {
-      console.log(val);
-    },
-    handleClick(row) {
-      console.log(row);
-    },
+    handleSelectionChange(val) {},
+    handleClick(row) {},
     saveColumn() {
       localStorage.setItem("columnSet", JSON.stringify(this.showColumn));
       this.visible = false;

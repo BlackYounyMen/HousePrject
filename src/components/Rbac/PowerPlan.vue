@@ -51,9 +51,7 @@ export default {
         this.List.push(Content);
       }
     },
-    handleNodeClick(data) {
-      console.log(data);
-    },
+    handleNodeClick(data) {},
     GetAll() {
       this.axios.get("https://localhost:5001/api/Power/GetMenu").then((res) => {
         this.data = res.data;

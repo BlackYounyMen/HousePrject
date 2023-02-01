@@ -82,7 +82,7 @@ export default {
         .get(`https://localhost:5001/api/Personnel/Recoil?id=${this.id}`)
         .then((res) => {
           var d = res.data.Result;
-          console.log(d);
+
           this.sizeForm = {
             id: d.Id,
             humanId: d.HumanId,
@@ -112,7 +112,6 @@ export default {
         });
     },
     handleAvatarSuccess(val) {
-      console.log(val);
       this.imageUrl = val;
       this.sizeForm.handIcon = val;
     },

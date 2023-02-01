@@ -1,296 +1,123 @@
-<template>
-  <div id="app">
-    <el-row>
-      <el-col :span="6"
-        ><div class="grid-content bg-purple" style="float: left">
-          生产部门:<el-input
-            v-model="searth.name"
-            style="width: 300px"
-          ></el-input></div
-      ></el-col>
-      <el-col :span="10"
-        ><div class="grid-content bg-purple-light">
-          录入时间
-          <el-date-picker
-            v-model="searth.sdate"
-            type="date"
-            placeholder="选择日期"
-            style="width: 300px"
-          >
-          </el-date-picker>
+<template   >
+  <div>
+    <el-form
+      :model="form"
+      ref="form"
+      :rules="rules"
+      label-width="80px"
+      :inline="false"
+      size="normal"
+    >
+      <el-row>
+        <el-col :span="12"
+          ><div class="grid-content bg-purple">
+            <el-form-item label="序号" prop="cus_Id">
+              <el-input v-model="form.cus_Id" readonly="readonly"></el-input>
+            </el-form-item></div
+        ></el-col>
+        <el-col :span="12"
+          ><div class="grid-content bg-purple-light">
+            <el-form-item label="姓名" prop="name">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item></div
+        ></el-col>
+      </el-row>
 
-          至:
-          <el-date-picker
-            v-model="searth.odate"
-            type="date"
-            placeholder="选择日期"
-            style="width: 300px"
-          >
-          </el-date-picker></div
-      ></el-col>
-      <el-col :span="2"
-        ><div class="grid-content bg-purple"></div>
-        <el-button type="primary" size="default" @click="Load()"
-          >查询</el-button
-        >
-      </el-col>
-      <el-col :span="6"
-        ><div class="grid-content bg-purple-light">
-          <el-button type="primary" size="default" @click="Load()"
-            >导出数据</el-button
-          >
-        </div></el-col
-      >
-    </el-row>
-    <el-table
-      :data="tableData"
-      border
-      style="width: 100%"
-      ref="table"
-      @selection-change="handleSelectionChange"
-    >
-      <!--配置菜单开始-->
-      <el-table-column fixed type="index" align="center" :index="1">
-        <template #header>
-          <el-popover placement="bottom" :width="600" :visible="visible">
-            <!-- 配置列面板 -->
-            <transition name="fade">
-              <div>
-                <div>选择显示字段</div>
-                <div>
-                  <!--在这里配置他的数列-->
-                  <el-checkbox v-model="showColumn.select">复选框</el-checkbox>
-                  <el-checkbox v-model="showColumn.date">日期</el-checkbox>
-                  <el-checkbox v-model="showColumn.name">姓名</el-checkbox>
-                  <el-checkbox v-model="showColumn.provinces">省份</el-checkbox>
-                  <el-checkbox v-model="showColumn.city">市区</el-checkbox>
-                  <el-checkbox v-model="showColumn.adreess">地址</el-checkbox>
-                  <el-checkbox v-model="showColumn.zipCode">邮编</el-checkbox>
-                </div>
-              </div>
-            </transition>
-            <template #reference>
-              <i
-                class="el-icon-setting"
-                style="font-size: 22px; cursor: pointer"
-                @click="visible = true"
-              ></i>
-            </template>
-          </el-popover>
-        </template>
-      </el-table-column>
-      <!--配置菜单结束-->
-      <!--数据表格的展示，运用v-if使其实现效果-->
-      <el-table-column type="selection" width="55" v-if="showColumn.select">
-      </el-table-column>
-      <el-table-column
-        prop="date"
-        label="日期"
-        width="150"
-        v-if="showColumn.date"
-      >
-      </el-table-column>
-      <el-table-column
-        prop="name"
-        label="姓名"
-        width="120"
-        v-if="showColumn.name"
-      >
-      </el-table-column>
-      <el-table-column
-        prop="province"
-        label="省份"
-        width="120"
-        v-if="showColumn.provinces"
-      >
-      </el-table-column>
-      <el-table-column
-        prop="city"
-        label="市区"
-        width="120"
-        v-if="showColumn.city"
-      >
-      </el-table-column>
-      <el-table-column
-        prop="address"
-        label="地址"
-        minWidth="120"
-        maxWidth="140"
-        v-if="showColumn.adreess"
-      >
-      </el-table-column>
-      <el-table-column
-        prop="zip"
-        label="邮编"
-        width="120"
-        v-if="showColumn.zipCode"
-      >
-      </el-table-column>
-      <el-table-column label="操作" width="100" align="center">
-        <template #default="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small"
-            >查看</el-button
-          >
-          <el-button type="text" size="small">编辑</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <!--数据表格的展示，运用v-if使其实现效果（结束）-->
-    <!--分页开始-->
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :page-sizes="[10, 20, 30, 40]"
-      :page-size="page.pagesize"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="page.total"
-    >
-    </el-pagination>
-    <!--分页结束-->
-    <!--这是弹窗的开始-->
-    <el-dialog
-      title="添加甲方负责人"
-      :visible.sync="addDid"
-      v-if="addDid"
-      width="50%"
-    >
-      <span>
-        <Diglist @Success="DigColse"></Diglist>
-      </span>
-      <span slot="footer"> </span>
-    </el-dialog>
+      <el-row>
+        <el-col :span="12"
+          ><div class="grid-content bg-purple">
+            <el-form-item label="职务" prop="post">
+              <el-input v-model="form.post"></el-input>
+            </el-form-item></div
+        ></el-col>
+        <el-col :span="12"
+          ><div class="grid-content bg-purple-light">
+            <el-form-item label="部门" prop="dep">
+              <el-input v-model="form.dep"></el-input>
+            </el-form-item></div
+        ></el-col>
+      </el-row>
 
-    <!--这是弹窗的结束-->
+      <el-row>
+        <el-col :span="12"
+          ><div class="grid-content bg-purple">
+            <el-form-item label="电话" prop="phone">
+              <el-input v-model="form.phone"></el-input>
+            </el-form-item></div
+        ></el-col>
+        <el-col :span="12"
+          ><div class="grid-content bg-purple-light">
+            <el-form-item label="Email" prop="email">
+              <el-input v-model="form.email"></el-input>
+            </el-form-item></div
+        ></el-col>
+      </el-row>
+
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit('form')">添加</el-button>
+        <el-button>取消</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
-
 <script>
-import Diglist from "../../components/Customer/DigCustonerAdd.vue";
 export default {
-  components: { Diglist },
   data() {
     return {
-      searth: {
+      form: {
+        cus_Id: "",
         name: "",
-        sdate: "",
-        odate: "",
+        post: "",
+        phone: "",
+        dep: "",
+        email: "",
       },
-      page: {
-        pageindex: 1,
-        pagedata: 10,
-        total: 0,
-        totalpage: 0,
-      },
-      visible: false,
-      addDid: false,
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1518 弄",
-          zip: 200333,
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1517 弄",
-          zip: 200333,
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1519 弄",
-          zip: 200333,
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1516 弄",
-          zip: 200333,
-        },
-      ],
-      // 列的配置化对象，存储配置信息
-      showColumn: {
-        select: true,
-        date: true,
-        name: true,
-        provinces: true,
-        city: true,
-        adreess: true,
-        zipCode: true,
+      rules: {
+        cus_Id: [{ required: true, message: "请输入序号", trigger: "blur" }],
+        name: [{ required: true, message: "请输入姓名", trigger: "blur" }],
+        post: [{ required: true, message: "请输入职务", trigger: "blur" }],
+        phone: [{ required: true, message: "请输入部门", trigger: "blur" }],
+        dep: [{ required: true, message: "请输入电话", trigger: "blur" }],
+        email: [{ required: true, message: "请输入Email", trigger: "blur" }],
       },
     };
   },
-  mounted() {
-    // 发请求得到showColumnInitData的列的名字
-    if (localStorage.getItem("columnSet")) {
-      this.showColumn = JSON.parse(localStorage.getItem("columnSet"));
-    } else {
-      this.showColumn = {
-        select: true,
-        date: true,
-        name: true,
-        provinces: true,
-        city: true,
-        adreess: true,
-        zipCode: true,
-      };
-    }
-  },
   methods: {
-    handleSelectionChange(val) {
-      console.log(val);
-    },
-    handleClick(row) {
-      console.log(row);
-    },
-    saveColumn() {
-      localStorage.setItem("columnSet", JSON.stringify(this.showColumn));
-      this.visible = false;
-    },
+    onSubmit(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          if (localStorage.getItem("customeritem") == null) {
+            var list = [];
+            list.push(this.form);
+            localStorage.setItem("customeritem", JSON.stringify(list));
+          } else {
+            var d = JSON.parse(localStorage.getItem("customeritem"));
 
-    //分页显示数
-    handleSizeChange(val) {
-      this.page.pagedata = val;
-      this.GetAll();
-    },
-    //当前页码
-    handleCurrentChange(val) {
-      this.page.pageindex = val;
-      this.GetAll();
-    },
+            d.push(this.form);
+            localStorage.setItem("customeritem", JSON.stringify(d));
+          }
 
-    //弹框开启
-    DigOpen() {
-      this.addDid = true;
+          this.$emit("Success", true);
+        } else {
+          return false;
+        }
+      });
     },
-    //弹框关闭
-    DigColse(d) {
-      console.log(d);
-      this.$message.success("添加成功");
-      this.addDid = false;
-      this.GetAll();
-    },
+  },
+  created() {
+    var name = JSON.parse(localStorage.getItem("UserInfo")).HumanId;
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hour = date.getHours(); //获取当前小时数(0-23)
+    const minute = date.getMinutes(); //获取当前分钟数(0-59)
+    const second = date.getSeconds(); //获取当前秒数(0-59)
+
+    var d = `${name}${year}${month}${day}${hour}${minute}${second}`;
+    this.form.cus_Id = d;
   },
 };
 </script>
-
-<style lang="postcss" scoped>
-/* 控制淡入淡出效果 */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
+<style   >
 </style>
