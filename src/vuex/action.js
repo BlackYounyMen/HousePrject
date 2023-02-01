@@ -47,3 +47,32 @@ export const ObtainSecondSelect = ({ commit }, data) => {
     });
 };
 
+
+// 获取客户信息数据
+export const loadCustomerData = ({ commit }, data) => {
+    return new Promise(() => {
+
+        var Searth = {
+            params: {
+                pageindex: data.pageindex,
+                pagesize: data.pagedata,
+            },
+        };
+
+        console.log(data);
+        axios.get("https://localhost:5001/api/Customerinfo/GetData", Searth).then((res) => {
+
+            commit('SET_Customer_INFO', res.data);
+        });
+    });
+};
+//获取行标题是否显示的数据
+export const loadCustomerStateData = ({ commit }) => {
+    return new Promise(() => {
+
+        axios.get("https://localhost:5001/api/Customerinfo/GetState").then((res) => {
+
+            commit('SET_CustomerState_INFO', res.data);
+        });
+    });
+};

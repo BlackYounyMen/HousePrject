@@ -28,3 +28,18 @@ export const SET_FIRST_ITEM = (state, seckills) => {
 export const SET_SECOND_ITEM = (state, seckills) => {
     state.SecondSelectItem = seckills;
 };
+//获取客户信息的数据
+export const SET_Customer_INFO = (state, seckills) => {
+    state.CustomerList = [];
+    state.page.totalpage = seckills.PageSize;
+    state.page.total = seckills.PageCount;
+
+    state.CustomerList = seckills.Data;
+    console.log(state.CustomerList);
+};
+//获取行标题是否显示的数据
+export const SET_CustomerState_INFO = (state, seckills) => {
+    console.log(seckills);
+    state.CustomerStateList = seckills;
+};
+
