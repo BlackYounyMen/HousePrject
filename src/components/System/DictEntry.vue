@@ -48,10 +48,19 @@
         <el-col :span="12"
           ><div class="grid-content bg-purple-light">
             <el-form-item>
-              <el-button type="primary" @click="add('form')"
-                >添加字典项</el-button
-              >
-              <el-button>取消</el-button>
+              <div v-if="buttonstate" style="float: left">
+                <el-button type="primary" @click="add('form')"
+                  >添加字典项</el-button
+                >
+                <el-button @click="deleteitemdata()">取消</el-button>
+              </div>
+
+              <div v-if="updatestate" style="float: left">
+                <el-button type="primary" @click="update('form')"
+                  >修改字典项</el-button
+                >
+                <el-button @click="showtab()">取消</el-button>
+              </div>
             </el-form-item>
           </div></el-col
         >
@@ -140,6 +149,8 @@ export default {
         state: true,
         pid: 0,
       },
+      buttonstate: true,
+      updatestate: false,
       rules: {
         itemCode: [
           { required: true, message: "请输入字典项", trigger: "blur" },
@@ -175,16 +186,18 @@ export default {
         });
     },
     Delete(val) {
-      this.axios.get(`${val}`).then((res) => {
-        if (res.data == true) {
-          this.$message({
-            showClose: true,
-            message: "删除成功",
-            type: "warning",
-          });
-          this.getall();
-        }
-      });
+      this.axios
+        .get(`https://localhost:5001/api/Dictionariesentry/Delete?id=${val.Id}`)
+        .then((res) => {
+          if (res.data == true) {
+            this.$message({
+              showClose: true,
+              message: "删除成功",
+              type: "warning",
+            });
+            this.getall();
+          }
+        });
     },
     getall() {
       var data = {
@@ -206,33 +219,90 @@ export default {
     add(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.axios.post("", this.form).then((res) => {
-            if (res.data == true) {
-              this.$message({
-                showClose: true,
-                message: "添加成功",
-                type: "warning",
-              });
-              this.getall();
-            }
-          });
+          this.axios
+            .post(
+              "https://localhost:5001/api/Dictionariesentry/DIcAdd",
+              this.form
+            )
+            .then((res) => {
+              if (res.data == true) {
+                this.$message({
+                  showClose: true,
+                  message: "添加成功",
+                  type: "warning",
+                });
+                this.getall();
+              }
+            });
         } else {
           return false;
         }
       });
     },
+    //添加变成编辑
+    Edit(val) {
+      console.log(val);
+      this.buttonstate = false;
+      this.updatestate = true;
+      this.form = {
+        id: val.Id,
+        itemCode: val.ItemCode,
+        itemName: val.ItemName,
+        orderId: val.OrderId,
+        state: val.Dtate,
+        pid: val.Pid,
+      };
+    },
+    //从编辑变成添加按钮
+    showtab() {
+      this.buttonstate = true;
+      this.updatestate = false;
+    },
     //分页显示数
     handleSizeChange(val) {
       this.page.pagesize = val;
-      this.GetAll();
+      this.getall();
     },
     //当前页码
     handleCurrentChange(val) {
       this.page.pageindex = val;
-      this.GetAll();
+      this.getall();
+    },
+    update(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.axios
+            .post(
+              "https://localhost:5001/api/Dictionariesentry/DIcUpdate",
+              this.form
+            )
+            .then((res) => {
+              if (res.data == true) {
+                this.$message({
+                  showClose: true,
+                  message: "修改成功",
+                  type: "warning",
+                });
+                this.getall();
+              }
+            });
+        } else {
+          return false;
+        }
+      });
+    },
+    deleteitemdata() {
+      this.form = {
+        itemCode: "",
+        itemName: "",
+        orderId: 0,
+        state: true,
+        pid: 0,
+      };
     },
   },
   created() {
+    this.form.pid = this.id;
     this.getall();
   },
 };

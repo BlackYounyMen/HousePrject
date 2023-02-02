@@ -7,7 +7,6 @@
         </el-form-item>
         <el-button type="primary" @click="GetAll()">查询</el-button>
         <el-button type="primary" @click="DigOpen()">添加</el-button>
-        <el-button type="primary" @click="DeleteItem()">批量删除</el-button>
       </el-form-item>
     </el-form>
 
@@ -16,9 +15,7 @@
       :data="tableData"
       tooltip-effect="dark"
       style="width: 100%"
-      @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" width="55"> </el-table-column>
       <el-table-column prop="HumanId" label="人力资源Id" width="120">
       </el-table-column>
       <el-table-column prop="Name" label="姓名" width="140"> </el-table-column>
@@ -122,7 +119,6 @@ export default {
       PlanDid: false,
       tableData: [],
       Fid: 0,
-      List: [],
     };
   },
   methods: {
@@ -151,10 +147,6 @@ export default {
         });
     },
 
-    //多选
-    handleSelectionChange(val) {
-      this.List = val;
-    },
     //分页显示数
     handleSizeChange(val) {
       this.page.pagedata = val;
@@ -233,43 +225,43 @@ export default {
         });
     },
     //批量删除
-    DeleteItem() {
-      const list = [];
-      for (let a of this.List) {
-        list.push(a.Id);
-      }
-      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-          this.axios
-            .post("https://localhost:5001/api/Personnel/Delete", list)
-            .then((res) => {
-              var state = res.data;
-              if (state == true) {
-                this.$message({
-                  showClose: true,
-                  message: "删除成功",
-                });
-                this.GetAll();
-              } else {
-                this.$message({
-                  showClose: true,
-                  message: "删除失败",
-                  type: "warning",
-                });
-              }
-            });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
-        });
-    },
+    // DeleteItem() {
+    //   const list = [];
+    //   for (let a of this.List) {
+    //     list.push(a.Id);
+    //   }
+    //   this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+    //     confirmButtonText: "确定",
+    //     cancelButtonText: "取消",
+    //     type: "warning",
+    //   })
+    //     .then(() => {
+    //       this.axios
+    //         .post("https://localhost:5001/api/Personnel/Delete", list)
+    //         .then((res) => {
+    //           var state = res.data;
+    //           if (state == true) {
+    //             this.$message({
+    //               showClose: true,
+    //               message: "删除成功",
+    //             });
+    //             this.GetAll();
+    //           } else {
+    //             this.$message({
+    //               showClose: true,
+    //               message: "删除失败",
+    //               type: "warning",
+    //             });
+    //           }
+    //         });
+    //     })
+    //     .catch(() => {
+    //       this.$message({
+    //         type: "info",
+    //         message: "已取消删除",
+    //       });
+    //     });
+    // },
     //#endregion
 
     //#region  对话框部分
@@ -302,3 +294,21 @@ export default {
   },
 };
 </script>
+<style>
+.el-dialog {
+  display: flex;
+  flex-direction: column;
+  margin: 0 !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /*height:600px;*/
+  max-height: calc(100% - 200px);
+  max-width: calc(100% - 30px);
+}
+.el-dialog .el-dialog__body {
+  flex: 1;
+  overflow: auto;
+}
+</style>
