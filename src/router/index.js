@@ -33,6 +33,18 @@ const routes = [
       },
       //#endregion
 
+
+
+      //#region 合同管理
+      {
+        path: '/ContractAdd', // 合同信息录入
+        name: 'ContractAdd',
+        component: () => import('../views/Contract/ContractAdd')
+      },
+
+      //#endregion
+
+
       //#region RBAC
       {
         path: '/PermissionsView', //权限操作
