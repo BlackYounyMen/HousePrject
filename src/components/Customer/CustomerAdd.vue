@@ -76,9 +76,36 @@ export default {
         cus_Id: [{ required: true, message: "请输入序号", trigger: "blur" }],
         name: [{ required: true, message: "请输入姓名", trigger: "blur" }],
         post: [{ required: true, message: "请输入职务", trigger: "blur" }],
-        phone: [{ required: true, message: "请输入部门", trigger: "blur" }],
-        dep: [{ required: true, message: "请输入电话", trigger: "blur" }],
-        email: [{ required: true, message: "请输入Email", trigger: "blur" }],
+        phone: [
+          { required: true, message: "请输入手机号", trigger: "blur" },
+          {
+            validator: function (rule, value, callback) {
+              if (/^1[34578]\d{9}$/.test(value) == false) {
+                callback(new Error("手机号格式错误"));
+              } else {
+                callback();
+              }
+            },
+            trigger: "blur",
+          },
+        ],
+        dep: [{ required: true, message: "请输入部门", trigger: "blur" }],
+
+        email: [
+          { required: true, message: "请输入Email", trigger: "blur" },
+          {
+            validator: function (rule, value, callback) {
+              const regEmail =
+                /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+              if (regEmail.test(value) == false) {
+                callback(new Error("邮箱格式错误"));
+              } else {
+                callback();
+              }
+            },
+            trigger: "blur",
+          },
+        ],
       },
     };
   },

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 // import state from './store';
 
 // 获取水表数据
@@ -112,6 +113,22 @@ export const loadCustomerStateData = ({ commit }) => {
         axios.get("https://localhost:5001/api/Customerinfo/GetState").then((res) => {
 
             commit('SET_CustomerState_INFO', res.data);
+        });
+    });
+};
+
+//添加他的合同信息
+export const CustomerAdd = ({ commit }, data) => {
+    return new Promise(() => {
+        console.log(data);
+        var Dto = {
+            contractinfo: data,
+            subscriptioninfo: JSON.parse(localStorage.getItem("Contract")),
+
+        };
+        axios.post("https://localhost:5001/api/Customerinfo/CustomeAdd", Dto).then((res) => {
+            console.log(res.data)
+            commit('SET_STATE_UPDATE', res.data);
         });
     });
 };
