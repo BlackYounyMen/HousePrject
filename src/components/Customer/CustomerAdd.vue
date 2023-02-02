@@ -119,7 +119,6 @@ export default {
             localStorage.setItem("customeritem", JSON.stringify(list));
           } else {
             var d = JSON.parse(localStorage.getItem("customeritem"));
-
             d.push(this.form);
             localStorage.setItem("customeritem", JSON.stringify(d));
           }

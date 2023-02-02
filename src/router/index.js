@@ -44,6 +44,15 @@ const routes = [
 
       //#endregion
 
+      //#region 系统管理
+      {
+        path: '/DictItem', // 字典表
+        name: 'DictItem',
+        component: () => import('../views/system/DictItem')
+      },
+
+      //#endregion
+
 
       //#region RBAC
       {
