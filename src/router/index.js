@@ -41,6 +41,12 @@ const routes = [
         name: 'ContractAdd',
         component: () => import('../views/Contract/ContractAdd')
       },
+      {
+        path: '/ContractList', // 合同信息
+        name: 'ContractList',
+        component: () => import('../views/Contract/ContractList.vue')
+      },
+
 
       //#endregion
 

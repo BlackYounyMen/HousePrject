@@ -16,23 +16,19 @@
       tooltip-effect="dark"
       style="width: 100%"
     >
-      <el-table-column prop="HumanId" label="人力资源Id" width="120">
+      <el-table-column prop="Name" label="字典名称" width="140">
       </el-table-column>
-      <el-table-column prop="Name" label="姓名" width="140"> </el-table-column>
-      <el-table-column prop="Account" label="账号" width="120">
+      <el-table-column prop="Coding" label="字典编码" width="120">
       </el-table-column>
-      <el-table-column prop="Pwd" label="密码" width="120">
+      <el-table-column prop="State" label="状态" width="120">
         <template slot-scope="scope">
-          <span v-for="item in scope.row.Pwd.length" :key="item">*</span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="ClassId" label="部门" width="120">
-      </el-table-column>
-      <el-table-column prop="OnlineState" label="OnlineState" width="120">
-      </el-table-column>
-      <el-table-column prop="HandIcon" label="头像" width="180">
-        <template slot-scope="scope">
-          <img :src="scope.row.HandIcon" width="120px" height="60px" />
+          <el-switch
+            v-model="scope.row.State"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+            @change="EditState(scope.row.Id)"
+          >
+          </el-switch>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="200">
@@ -61,23 +57,13 @@
     </el-pagination>
     <!--分页结束-->
     <!--这是弹窗的开始-->
-    <el-dialog
-      title="人员添加"
-      :visible.sync="addDid"
-      v-if="addDid"
-      width="50%"
-    >
+    <el-dialog title="添加" :visible.sync="addDid" v-if="addDid" width="50%">
       <span>
         <RoleAdd @Success="DigColse"></RoleAdd>
       </span>
       <span slot="footer"> </span>
     </el-dialog>
-    <el-dialog
-      title="人员修改"
-      :visible.sync="EditDid"
-      v-if="EditDid"
-      width="30%"
-    >
+    <el-dialog title="修改" :visible.sync="EditDid" v-if="EditDid" width="30%">
       <span>
         <RoleEdit :id="Fid" @Success="EditDigColse"></RoleEdit>
       </span>
@@ -91,7 +77,7 @@
       width="80%"
     >
       <span>
-        <PowerPlan :id="1" @Success="DigPlan"></PowerPlan>
+        <PowerPlan :id="Fid" @Success="DigPlan"></PowerPlan>
       </span>
       <span slot="footer"> </span>
     </el-dialog>
@@ -100,8 +86,8 @@
   </div>
 </template>
 <script>
-import RoleAdd from "../../components/System/DictEntry.vue";
-import RoleEdit from "../../components/Rbac/UserEdit.vue";
+import RoleAdd from "../../components/System/DictAdd.vue";
+import RoleEdit from "../../components/System/DictEdit.vue";
 import PowerPlan from "../../components/System/DictEntry.vue";
 export default {
   components: { RoleAdd, RoleEdit, PowerPlan },
@@ -134,7 +120,7 @@ export default {
         },
       };
       this.axios
-        .get("https://localhost:5001/api/Personnel/GetData", token)
+        .get("https://localhost:5001/api/Dictionaries/GetAll", token)
         .then((res) => {
           var data = res.data;
           if (data.Code == 200) {
@@ -160,7 +146,7 @@ export default {
     //修改滑块状态值
     EditState(val) {
       this.axios
-        .post(`https://localhost:5001/api/Personnel/EditState?id=${val}`)
+        .post(`https://localhost:5001/api/Dictionaries/EditState?id=${val}`)
         .then((res) => {
           var data = res.data;
           if (data == true) {
@@ -199,7 +185,7 @@ export default {
       })
         .then(() => {
           this.axios
-            .post("https://localhost:5001/api/Personnel/Delete", list)
+            .get(`https://localhost:5001/api/Dictionaries/Delete?id=${val.Id}`)
             .then((res) => {
               var state = res.data;
               if (state == true) {
