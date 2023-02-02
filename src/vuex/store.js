@@ -20,6 +20,8 @@ export default new Vuex.Store({
         SecondSelectItem: [],//获取第二个下拉框集合
         CustomerList: [],//获取客户所有数据
         CustomerStateList: [],//获取行标题是否显示的数据   列的配置化对象，存储配置信息
+        PersonChargeList: [],//获取负责人数据
+        AllPersonChargeList: [],//获取客户所有数据反填
     },
     getters,
     actions,
