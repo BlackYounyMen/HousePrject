@@ -22,7 +22,6 @@ export const loadWaterData = ({ commit }, data) => {
 // 获取水表数据
 export const EditState = ({ commit }, data) => {
     return new Promise(() => {
-        console.log(data);
         axios.post(`https://localhost:5001/api/Device/EditState?id=${data}`).then((res) => {
             commit('SET_STATE_UPDATE', res.data);
         });
@@ -41,7 +40,6 @@ export const ObtainSelect = ({ commit }, data) => {
 //获取第二个下拉的数据
 export const ObtainSecondSelect = ({ commit }, data) => {
     return new Promise(() => {
-        console.log(data);
         axios.get(data).then((res) => {
             commit('SET_SECOND_ITEM', res.data);
         });
@@ -98,9 +96,7 @@ export const loadCustomerData = ({ commit }, data) => {
             },
         };
 
-        console.log(data);
         axios.get("https://localhost:5001/api/Customerinfo/GetData", Searth).then((res) => {
-
             commit('SET_Customer_INFO', res.data);
         });
     });
@@ -108,10 +104,40 @@ export const loadCustomerData = ({ commit }, data) => {
 //获取行标题是否显示的数据
 export const loadCustomerStateData = ({ commit }) => {
     return new Promise(() => {
-
         axios.get("https://localhost:5001/api/Customerinfo/GetState").then((res) => {
-
             commit('SET_CustomerState_INFO', res.data);
+        });
+    });
+};
+// 获取联系人信息数据
+export const loadPersonChargeData = ({ commit }, data) => {
+    return new Promise(() => {
+        console.log(data);
+        var Searth = {
+            params: {
+                name: data.name,
+                pageindex: data.pageindex,
+                pagesize: data.pagedata,
+            },
+        };
+
+        console.log(data);
+        axios.get("https://localhost:5001/api/Customerinfo/GetPerson", Searth).then((res) => {
+            commit('SET_PersonCharge_INFO', res.data);
+        });
+    });
+};
+
+// 获取客户所有数据信息的反填数据
+export const loadPerSonRecoilData = ({ commit }, data) => {
+    return new Promise(() => {
+        console.log(data);
+        axios.get(`https://localhost:5001/api/Customerinfo/CustomerRecoil?id=${data}`).then((res) => {
+            console.log(res.data);
+            console.log(res.data.customerinfo);
+            console.log(res.data.personcharge);
+            console.log(res.data.fileinfo);
+            commit('SET_PerSonRecoillist_INFO', res.data);
         });
     });
 };
