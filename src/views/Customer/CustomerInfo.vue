@@ -503,7 +503,7 @@
 
       <el-table-column label="操作" width="100" align="center">
         <template #default="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small"
+          <el-button @click="handleClick(scope.row.Id)" type="text" size="small"
             >查看</el-button
           >
           <el-button type="text" size="small">编辑</el-button>
@@ -522,13 +522,30 @@
     >
     </el-pagination>
     <!--分页结束-->
+
+    <!--组件弹窗-->
+    <el-dialog
+      title="客户信息展示"
+      :visible.sync="CustItem"
+      width="90%"
+      v-if="CustItem"
+    >
+      <span><CustSeePerson :id="pid"></CustSeePerson></span>
+      <span slot="footer">
+        <el-button @click="CustItem = false">关闭</el-button>
+        <el-button type="primary" @click="CustItem">OK</el-button>
+      </span>
+    </el-dialog>
+    <!--组件弹窗结束-->
   </div>
 </template>
 
 <script>
+import CustSeePerson from "@/components/Customer/CustSeePerson.vue";
 import store from "@/vuex/store";
 import { mapState, mapActions, mapGetters, mapMutations } from "vuex";
 export default {
+  components: { CustSeePerson },
   data() {
     return {
       searth: {
@@ -540,6 +557,8 @@ export default {
         pageindex: 1,
         pagedata: 1,
       },
+      pid: 0,
+      CustItem: false,
       visible: false,
     };
   },
@@ -563,6 +582,8 @@ export default {
     },
     handleClick(row) {
       console.log(row);
+      this.pid = row;
+      this.CustItem = true;
     },
     saveColumn() {
       localStorage.setItem("columnSet", JSON.stringify(this.showColumn));

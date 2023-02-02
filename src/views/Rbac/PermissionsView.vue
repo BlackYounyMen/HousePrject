@@ -228,14 +228,14 @@ export default {
       this.addDid = true;
     },
     //弹框关闭
-    DigColse(d) {
+    DigColse() {
       this.$message.success("添加成功");
       this.addDid = false;
       this.GetAll();
     },
 
     //修改弹框关闭
-    EditDigColse(d) {
+    EditDigColse() {
       this.$message.success("修改成功");
       this.EditDid = false;
       this.GetAll();
