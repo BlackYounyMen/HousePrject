@@ -162,7 +162,7 @@ export default {
 
       page: {
         pageindex: 1,
-        pagesize: 3,
+        pagesize: 1,
         total: 0,
         totalpage: 0,
       },
