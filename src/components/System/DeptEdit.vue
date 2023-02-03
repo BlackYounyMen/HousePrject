@@ -8,16 +8,14 @@
       :inline="false"
       size="normal"
     >
-      <el-form-item label="字典项" prop="name">
-        <el-input v-model="form.name"></el-input>
+      <el-form-item label="部门名称" prop="Name">
+        <el-input v-model="form.Name"></el-input>
       </el-form-item>
-      <el-form-item label="状态">
-        <el-switch
-          v-model="form.state"
-          active-color="#13ce66"
-          inactive-color="#ff4949"
-        >
-        </el-switch>
+      <el-form-item label="上级id" prop="SuperiorId">
+        <el-input v-model="form.SuperiorId"></el-input>
+      </el-form-item>
+      <el-form-item label="部门描述" prop="DescContent">
+        <el-input v-model="form.DescContent"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="add('form')">修改</el-button>
@@ -32,13 +30,17 @@ export default {
   data() {
     return {
       form: {
-        name: "",
-        state: true,
+        Name: "",
+        SuperiorId: "",
+        DescContent: "",
       },
       rules: {
-        name: [{ required: true, message: "请输入字典项", trigger: "blur" }],
-        state: [
-          { required: true, message: "请输入字典值状态", trigger: "blur" },
+        Name: [{ required: true, message: "请输入部门名称", trigger: "blur" }],
+        SuperiorId: [
+          { required: true, message: "请输入上级id", trigger: "blur" },
+        ],
+        DescContent: [
+          { required: true, message: "请输入部门描述", trigger: "blur" },
         ],
       },
     };
@@ -46,12 +48,14 @@ export default {
   methods: {
     recoil() {
       this.axios
-        .get(`https://localhost:5001/api/Dictionaries/Recoil?id=${this.id}`)
+
+        .get(`https://localhost:5001/api/Department/Recoil?id=${this.id}`)
         .then((a) => {
           this.form = {
             id: a.data.Item.Id,
-            name: a.data.Item.Name,
-            state: a.data.Item.State,
+            Name: a.data.Item.Name,
+            SuperiorId: a.data.Item.SuperiorId,
+            DescContent: a.data.Item.DescContent,
           };
         });
     },
@@ -59,15 +63,12 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.axios
-            .post(
-              "https://localhost:5001/api/Dictionaries/DIcUpdate",
-              this.form
-            )
+            .post("https://localhost:5001/api/Department/DIcUpdate", this.form)
             .then((res) => {
               if (res.data == true) {
                 this.$message({
                   showClose: true,
-                  message: "添加成功",
+                  message: "修改成功",
                   type: "warning",
                 });
               }
@@ -80,7 +81,6 @@ export default {
     },
   },
   created() {
-    console.log(this.id);
     this.recoil();
   },
 };

@@ -500,13 +500,12 @@ export default {
       this.$refs.Subscript.validate((valid) => {
         if (valid) {
           if (localStorage.getItem("Contract") == null) {
-            console.log(this.Subscript);
             var list = [];
             list.push(this.Subscript);
             localStorage.setItem("Contract", JSON.stringify(list));
           } else {
             var d = JSON.parse(localStorage.getItem("Contract"));
-            console.log(this.Subscript);
+
             d.push(this.Subscript);
             localStorage.setItem("Contract", JSON.stringify(d));
           }
@@ -535,7 +534,6 @@ export default {
     //保存数据
     AddCustomer() {
       this.CustomerAdd(this.contractInfo);
-      2;
       console.log(this.BackState);
       if (this.BackState == true) {
         this.$message({

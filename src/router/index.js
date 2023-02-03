@@ -56,6 +56,11 @@ const routes = [
         name: 'DictItem',
         component: () => import('../views/system/DictItem')
       },
+      {
+        path: '/DeptMarage', // 字典表
+        name: 'DeptMarage',
+        component: () => import('../views/system/DeptMarage.vue')
+      },
 
       //#endregion
 

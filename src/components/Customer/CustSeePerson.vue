@@ -240,17 +240,13 @@ export default {
     },
   },
   created() {
-    console.log(this.id);
     this.Recoil();
-    console.log(this.AllPersonChargeList);
-
-    console.log(this.AllPersonChargeList.personcharge);
   },
 
   store,
 };
 </script>
-<style    >
+<style  >
 .el-row {
   &:last-child {
     margin-bottom: 0;

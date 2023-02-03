@@ -126,20 +126,16 @@ export default {
     },
     //分页显示数
     handleSizeChange(val) {
-      console.log(val);
-      console.log(this.pages);
       this.pages.pagedata = val;
       this.loadPersonChargeData(this.pages);
     },
     //当前页码
     handleCurrentChange(val) {
-      console.log(val);
       this.pages.pageindex = val;
-      console.log(this.pages);
+
       this.loadPersonChargeData(this.pages);
     },
     handleClick(val) {
-      console.log(val);
       if (localStorage.getItem("tempitem") == null) {
         localStorage.setItem("tempitem", JSON.stringify(val));
       } else {
@@ -149,7 +145,6 @@ export default {
       this.digshow = true;
     },
     SeeLocklist(val) {
-      console.log(val);
       this.pid = val;
       this.CustItem = true;
     },
