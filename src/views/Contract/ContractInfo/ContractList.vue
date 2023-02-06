@@ -43,10 +43,7 @@
       :data="tableData"
       tooltip-effect="dark"
       style="width: 100%"
-      @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" width="55"> </el-table-column>
-      <el-table-column prop="Id" label="序号" width="55"> </el-table-column>
       <el-table-column prop="ContractId" label="合同编号" width="155">
       </el-table-column>
       <el-table-column prop="ContractNum" label="合同名称"> </el-table-column>
