@@ -1,4 +1,10 @@
 // 设置水电数据
+export const SET_MEUN_COMMIT = (state, seckills) => {
+    console.log(seckills);
+    state.meunitem = seckills;
+};
+
+// 设置水电数据
 export const SET_Water_INFO = (state, seckills) => {
     state.page.totalpage = seckills.PageCount;
     console.log(state.page.totalpage)

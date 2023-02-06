@@ -1,7 +1,14 @@
 import axios from "axios";
 
+// 获取菜单数据
+export const loadMeun = ({ commit }, data) => {
+    return new Promise(() => {
+        axios.get(`https://localhost:5001/api/Login/GetPermissions?id=${data}`).then((res) => {
+            commit('SET_MEUN_COMMIT', res.data);
+        });
+    });
+};
 
-// import state from './store';
 
 // 获取水表数据
 export const loadWaterData = ({ commit }, data) => {
@@ -31,7 +38,6 @@ export const EditState = ({ commit }, data) => {
 //获取下拉的数据
 export const ObtainSelect = ({ commit }, data) => {
     return new Promise(() => {
-
         axios.get(data).then((res) => {
             commit('SET_FIRST_ITEM', res.data);
         });

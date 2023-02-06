@@ -9,6 +9,7 @@ import * as getters from './getter';
 Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
+        meunitem: [],
         DeviceList: [],//设备集合所用
         DeviveItem: [], //设备遍历所用
         page: {

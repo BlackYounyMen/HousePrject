@@ -19,17 +19,23 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"> </el-table-column>
-      <el-table-column prop="RoleName" label="姓名" width="180">
+      <el-table-column prop="HumanId" label="人力资源Id" width="120">
       </el-table-column>
-      <el-table-column prop="State" label="状态" width="180">
+      <el-table-column prop="Name" label="姓名" width="140"> </el-table-column>
+      <el-table-column prop="Account" label="账号" width="120">
+      </el-table-column>
+      <el-table-column prop="Pwd" label="密码" width="120">
         <template slot-scope="scope">
-          <el-switch
-            v-model="scope.row.State"
-            active-color="#13ce66"
-            inactive-color="#ff4949"
-            @change="EditState(scope.row.Id)"
-          >
-          </el-switch>
+          <span v-for="item in scope.row.Pwd.length" :key="item">*</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="ClassId" label="部门" width="120">
+      </el-table-column>
+      <el-table-column prop="OnlineState" label="OnlineState" width="120">
+      </el-table-column>
+      <el-table-column prop="HandIcon" label="头像" width="180">
+        <template slot-scope="scope">
+          <img :src="scope.row.HandIcon" width="120px" height="60px" />
         </template>
       </el-table-column>
       <el-table-column label="操作" width="200">
@@ -41,12 +47,11 @@
             >删除</el-button
           >
           <el-button @click="Plan(scope.row)" type="text" size="small"
-            >分配权限</el-button
+            >分配角色</el-button
           >
         </template>
       </el-table-column>
     </el-table>
-
     <!--分页开始-->
     <el-pagination
       @size-change="handleSizeChange"
@@ -60,10 +65,10 @@
     <!--分页结束-->
     <!--这是弹窗的开始-->
     <el-dialog
-      title="角色添加"
+      title="人员添加"
       :visible.sync="addDid"
       v-if="addDid"
-      width="30%"
+      width="50%"
     >
       <span>
         <RoleAdd @Success="DigColse"></RoleAdd>
@@ -71,7 +76,7 @@
       <span slot="footer"> </span>
     </el-dialog>
     <el-dialog
-      title="角色修改"
+      title="人员修改"
       :visible.sync="EditDid"
       v-if="EditDid"
       width="30%"
@@ -83,7 +88,7 @@
     </el-dialog>
 
     <el-dialog
-      title="权限分配"
+      title="角色分配"
       :visible.sync="PlanDid"
       v-if="PlanDid"
       width="30%"
@@ -98,9 +103,9 @@
   </div>
 </template>
 <script>
-import RoleAdd from "../../components/Rbac/RoleAdd.vue";
-import RoleEdit from "../../components/Rbac/RoleEdit.vue";
-import PowerPlan from "../../components/Rbac/PowerPlan.vue";
+import RoleAdd from "@/components/Rbac/UserAdd.vue";
+import RoleEdit from "@/components/Rbac/UserEdit.vue";
+import PowerPlan from "@/components/Rbac/RolePlan.vue";
 export default {
   components: { RoleAdd, RoleEdit, PowerPlan },
   data() {
@@ -133,7 +138,7 @@ export default {
         },
       };
       this.axios
-        .get("https://localhost:5001/api/Role/GetData", token)
+        .get("https://localhost:5001/api/Personnel/GetData", token)
         .then((res) => {
           var data = res.data;
           if (data.Code == 200) {
@@ -163,7 +168,7 @@ export default {
     //修改滑块状态值
     EditState(val) {
       this.axios
-        .post(`https://localhost:5001/api/Role/EditState?id=${val}`)
+        .post(`https://localhost:5001/api/Personnel/EditState?id=${val}`)
         .then((res) => {
           var data = res.data;
           if (data == true) {
@@ -202,7 +207,7 @@ export default {
       })
         .then(() => {
           this.axios
-            .post("https://localhost:5001/api/Role/Delete", list)
+            .post("https://localhost:5001/api/Personnel/Delete", list)
             .then((res) => {
               var state = res.data;
               if (state == true) {
@@ -240,7 +245,7 @@ export default {
       })
         .then(() => {
           this.axios
-            .post("https://localhost:5001/api/Role/Delete", list)
+            .post("https://localhost:5001/api/Personnel/Delete", list)
             .then((res) => {
               var state = res.data;
               if (state == true) {

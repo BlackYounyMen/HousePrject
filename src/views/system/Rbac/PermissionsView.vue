@@ -79,8 +79,9 @@
   </div>
 </template>
 <script>
-import PermissionsAdd from "../../components/Rbac/PermissionsAdd.vue";
-import PermissionsEdit from "../../components/Rbac/PermissionsEdit.vue";
+//@components/Rbac/PermissionsAdd.vue
+import PermissionsAdd from "@/components/Rbac/PermissionsAdd.vue";
+import PermissionsEdit from "@/components/Rbac/PermissionsEdit.vue";
 export default {
   components: { PermissionsAdd, PermissionsEdit },
   data() {
