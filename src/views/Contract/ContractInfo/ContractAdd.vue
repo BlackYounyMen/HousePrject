@@ -535,7 +535,7 @@ export default {
     //保存数据
     AddCustomer() {
       this.CustomerAdd(this.contractInfo);
-     
+
       console.log(this.BackState);
       if (this.BackState == true) {
         this.$message({
@@ -556,3 +556,10 @@ export default {
     const hour = date.getHours(); //获取当前小时数(0-23)
     const minute = date.getMinutes(); //获取当前分钟数(0-59)
     const second = date.getSeconds(); //获取当前秒数(0-59)
+    var d = `${name}${year}${month}${day}${hour}${minute}${second}`;
+    this.contractInfo.contractId = d;
+    this.getCustomer();
+    this.SubscriptList = JSON.parse(localStorage.getItem("Contract"));
+  },
+  store,
+};
