@@ -165,7 +165,24 @@ export const CustomerAdd = ({ commit }, data) => {
     });
 };
 
+// 获取人力资源信息数据
+export const loadHumanResourcesData = ({ commit }, data) => {
+    return new Promise(() => {
+        console.log(data);
+        var Searth = {
+            params: {
+                name: data.name,
+                pageindex: data.pageindex,
+                pagesize: data.pagedata,
+            },
+        };
 
+        console.log(data);
+        axios.get("https://localhost:5001/api/HumanResources/GetAll", Searth).then((res) => {
+            commit('SET_HumanResource_Info', res.data);
+        });
+    });
+};
 
 
 
