@@ -51,6 +51,8 @@
   </div>
 </template>
 <script>
+import store from "@/vuex/store";
+import { mapState, mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
