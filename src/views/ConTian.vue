@@ -105,9 +105,24 @@
         </el-main>
       </el-container>
     </el-container>
+
+    <footer>
+      <!--分页开始-->
+      <el-button
+        type="primary"
+        icon="el-icon-share"
+        size="default"
+        style="float: right; margin-right: 3%"
+        round
+        >前往新版</el-button
+      >
+
+      <!--分页结束-->
+    </footer>
   </div>
 </template>
 <script>
+import { getChildrenPath } from "@/router/indexUtil";
 export default {
   data() {
     return {
@@ -116,6 +131,14 @@ export default {
     };
   },
   methods: {
+    IsLogin() {
+      if (localStorage.getItem("UserInfo") != null) {
+        var userid = localStorage.getItem("UserInfo");
+        userid = JSON.parse(userid).Id;
+        getChildrenPath(userid);
+      }
+    },
+
     GetMenu() {
       var userid = localStorage.getItem("UserInfo");
       userid = JSON.parse(userid).Id;
@@ -137,6 +160,7 @@ export default {
     var userid = localStorage.getItem("UserInfo");
     this.HeadIcon = JSON.parse(userid).HandIcon;
     this.GetMenu();
+    this.IsLogin();
   },
 };
 </script>
@@ -176,5 +200,16 @@ body > .el-container {
 
 .el-container:nth-child(7) .el-aside {
   line-height: 320px;
+}
+footer {
+  height: 60px;
+  line-height: 60px;
+  position: fixed;
+  margin: auto;
+  left: 0;
+
+  bottom: 0;
+  top: 800px;
+  right: 5px;
 }
 </style>

@@ -42,6 +42,10 @@
   </div>
 </template>
 <script>
+import store from "@/vuex/store";
+import { mapActions, mapState } from "vuex";
+import { getChildrenPath } from "@/router/indexUtil";
+
 export default {
   data() {
     return {
@@ -52,8 +56,13 @@ export default {
   mounted() {
     this.$refs.Register.addEventListener("click", this.qieone);
     this.$refs.Login.addEventListener("click", this.qietwo);
+    localStorage.removeItem("UserInfo");
+  },
+  computed: {
+    ...mapState(["meunitem"]),
   },
   methods: {
+    ...mapActions(["loadMeun"]),
     qieone() {
       this.$refs.LoginFromf.classList.add("disappear");
       this.$refs.RegisterFromf.classList.remove("disappear");
@@ -78,12 +87,18 @@ export default {
           if (data.Code != 200) {
             this.$message.success("您的账号或者密码错误");
           } else {
+            // this.$apiUrl;
+            console.log(this.$apiUrl);
+
             localStorage.setItem("UserInfo", JSON.stringify(data.Result));
+            //使用路由的方法
+            getChildrenPath(data.Result.Id);
             this.$router.push("/ConTian");
           }
         });
     },
   },
+  store,
 };
 </script>
 

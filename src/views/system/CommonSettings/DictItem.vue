@@ -86,9 +86,9 @@
   </div>
 </template>
 <script>
-import RoleAdd from "../../components/System/DictAdd.vue";
-import RoleEdit from "../../components/System/DictEdit.vue";
-import PowerPlan from "../../components/System/DictEntry.vue";
+import RoleAdd from "@/components/System/DictAdd.vue";
+import RoleEdit from "@/components/System/DictEdit.vue";
+import PowerPlan from "@/components/System/DictEntry.vue";
 export default {
   components: { RoleAdd, RoleEdit, PowerPlan },
   data() {

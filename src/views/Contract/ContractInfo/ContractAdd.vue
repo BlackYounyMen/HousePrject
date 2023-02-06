@@ -535,7 +535,7 @@ export default {
     //保存数据
     AddCustomer() {
       this.CustomerAdd(this.contractInfo);
-      2;
+
       console.log(this.BackState);
       if (this.BackState == true) {
         this.$message({
