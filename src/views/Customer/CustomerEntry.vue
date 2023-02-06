@@ -154,7 +154,7 @@
 
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
-              <el-button @click="Delete(scope.row)" type="text" size="small"
+              <el-button @click="DeleteFile(scope.row)" type="text" size="small"
                 >删除</el-button
               >
             </template>
@@ -291,6 +291,9 @@ export default {
     localStoragedata() {
       this.tableData = JSON.parse(localStorage.getItem("customeritem"));
     },
+    localFiledata() {
+      this.FileData = JSON.parse(localStorage.getItem("FileItem"));
+    },
     Delete(val) {
       var newlist = [];
       for (let a of this.tableData) {
@@ -300,6 +303,16 @@ export default {
       }
       localStorage.setItem("customeritem", JSON.stringify(newlist));
       this.localStoragedata();
+    },
+    DeleteFile(val) {
+      var newlist = [];
+      for (let a of this.FileData) {
+        if (a != val) {
+          newlist.push(a);
+        }
+      }
+      localStorage.setItem("FileItem", JSON.stringify(newlist));
+      this.localFiledata();
     },
   },
   created() {
@@ -315,6 +328,7 @@ export default {
     var d = `${name}${year}${month}${day}${hour}${minute}${second}`;
     this.form.Number = d;
     this.localStoragedata();
+    this.localFiledata();
   },
   computed: {
     ...mapState(["BackState"]),

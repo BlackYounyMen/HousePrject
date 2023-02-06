@@ -171,7 +171,6 @@ export default {
   },
   methods: {
     EditState(val) {
-      console.log(val);
       this.axios
         .get(`https://localhost:5001/api/Dictionariesentry/EditState?id=${val}`)
         .then((res) => {
@@ -241,7 +240,6 @@ export default {
     },
     //添加变成编辑
     Edit(val) {
-      console.log(val);
       this.buttonstate = false;
       this.updatestate = true;
       this.form = {

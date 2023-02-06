@@ -581,7 +581,6 @@ export default {
       return num;
     },
     handleClick(row) {
-      console.log(row);
       this.pid = row;
       this.CustItem = true;
     },
@@ -592,16 +591,12 @@ export default {
 
     //分页显示数
     handleSizeChange(val) {
-      console.log(val);
-      console.log(this.pages);
       this.pages.pagedata = val;
       this.loadCustomerData(this.pages);
     },
     //当前页码
     handleCurrentChange(val) {
-      console.log(val);
       this.pages.pageindex = val;
-      console.log(this.pages);
       this.loadCustomerData(this.pages);
     },
   },
