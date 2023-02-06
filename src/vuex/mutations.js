@@ -56,4 +56,9 @@ export const SET_PerSonRecoillist_INFO = (state, seckills) => {
     state.AllPersonChargeList = seckills;
 };
 
+//
+export const SET_HumanResource_Info = (state, seckills) => {
+    state.HumanResourcesList = seckills;
+};
+
 
