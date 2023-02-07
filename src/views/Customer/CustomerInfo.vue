@@ -314,7 +314,7 @@
       <!--数据表格的展示，运用v-if使其实现效果-->
       <el-table-column type="selection" width="55" v-if="true">
       </el-table-column>
-      <el-table-column prop="Number" label="编号" width="100" v-if="true">
+      <el-table-column prop="Number" label="编号" width="200" v-if="true">
       </el-table-column>
       <el-table-column
         prop="CustomerName"
@@ -326,7 +326,7 @@
       <el-table-column
         prop="CompanyAddress"
         label="公司地址"
-        width="100"
+        width="200"
         v-if="true"
       >
       </el-table-column>
@@ -342,7 +342,7 @@
       <el-table-column
         prop="BankAccount"
         label="开户银行账号"
-        width="100"
+        width="200"
         v-if="CustomerStateList[6]"
       >
       </el-table-column>
@@ -398,7 +398,7 @@
       <el-table-column
         prop="Cus_Id"
         label="客户信_Id"
-        width="55"
+        width="200"
         v-if="CustomerStateList[14]"
       >
       </el-table-column>
@@ -440,7 +440,7 @@
       <el-table-column
         prop="Email"
         label="邮箱"
-        width="120"
+        width="200"
         v-if="CustomerStateList[20]"
       >
       </el-table-column>
@@ -450,6 +450,9 @@
         width="120"
         v-if="CustomerStateList[21]"
       >
+        <template slot-scope="scope">
+          {{ scope.row.EntryTime.substring(0, 10) }}
+        </template>
       </el-table-column>
       <el-table-column
         prop="FileName"
@@ -464,6 +467,9 @@
         width="120"
         v-if="CustomerStateList[23]"
       >
+        <template slot-scope="scope">
+          {{ scope.row.UploadTime.substring(0, 10) }}
+        </template>
       </el-table-column>
       <el-table-column
         prop="FileSize"
@@ -489,9 +495,12 @@
       <el-table-column
         prop="Url"
         label="附件路径"
-        width="120"
+        width="200"
         v-if="CustomerStateList[27]"
       >
+        <template slot-scope="scope">
+          <img :src="scope.row.Url" style="width: 180px; height: 120px" />
+        </template>
       </el-table-column>
       <el-table-column
         prop="FIleCategroy"

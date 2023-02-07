@@ -12,6 +12,11 @@ export function getChildrenPath(data) {
     .get(`https://localhost:5001/api/Login/GetPermissions?id=${data}`)
     .then((response) => {
       var menus = response.data;
+
+      // for (let a of menus) {
+      //     console.log(a)
+      // }
+
       menus.forEach((me) => {
         setChild(me, routerList, "", "");
       });
@@ -44,6 +49,7 @@ function setChild(me, routerList, rootName, rootPath) {
   var component = rootPath + me.path
 
   if (me.children != null && me.children != [] && me.children.length > 0) {
+
     //如果有下层
     me.children.forEach(node => {
       setChild(node, routerList, Name, component)

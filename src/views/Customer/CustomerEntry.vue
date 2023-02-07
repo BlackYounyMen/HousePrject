@@ -85,16 +85,24 @@
         <el-col :span="11">
           <el-form-item label="客户类型" prop="CustomerType">
             <el-select v-model="form.CustomerType" placeholder="请选择客户类型">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
+              <el-option
+                v-for="items in FirstSelectItem"
+                :key="items.Id"
+                :label="items.ItemName"
+                :value="items.ItemName"
+              ></el-option>
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="11">
           <el-form-item label="所属行业" prop="Industry">
             <el-select v-model="form.Industry" placeholder="请选择所属行业">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
+              <el-option
+                v-for="items in SecondSelectItem"
+                :key="items.Id"
+                :label="items.ItemName"
+                :value="items.ItemName"
+              ></el-option>
             </el-select>
           </el-form-item>
         </el-col>
@@ -103,8 +111,12 @@
         <el-col :span="11">
           <el-form-item label="信用级别" prop="CreditRating">
             <el-select v-model="form.CreditRating" placeholder="请选择信用级别">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
+              <el-option
+                v-for="items in ThirtdSelectItem"
+                :key="items.Id"
+                :label="items.ItemName"
+                :value="items.ItemName"
+              ></el-option>
             </el-select>
           </el-form-item>
         </el-col>
@@ -253,7 +265,12 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["ConMitCustomerAdd"]),
+    ...mapActions([
+      "ConMitCustomerAdd",
+      "ObtainSelect",
+      "ObtainSecondSelect",
+      "ObtainthirtdSelect",
+    ]),
     handlePreview(val) {
       var item = [];
       item.push(val);
@@ -329,9 +346,23 @@ export default {
     this.form.Number = d;
     this.localStoragedata();
     this.localFiledata();
+    this.ObtainSelect(
+      `https://localhost:5001/api/Dictionariesentry/GetSelect?id=5`
+    );
+    this.ObtainSecondSelect(
+      `https://localhost:5001/api/Dictionariesentry/GetSelect?id=6`
+    );
+    this.ObtainthirtdSelect(
+      `https://localhost:5001/api/Dictionariesentry/GetSelect?id=7`
+    );
   },
   computed: {
-    ...mapState(["BackState"]),
+    ...mapState([
+      "BackState",
+      "FirstSelectItem",
+      "SecondSelectItem",
+      "ThirtdSelectItem",
+    ]),
     ...mapGetters([""]),
   },
   store,

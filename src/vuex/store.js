@@ -19,12 +19,13 @@ export default new Vuex.Store({
         BackState: false, //后台返回前台的值
         FirstSelectItem: [],//获取第一个下拉框集合
         SecondSelectItem: [],//获取第二个下拉框集合
+        ThirtdSelectItem: [],//获取第三个下拉框集合
         CustomerList: [],//获取客户所有数据
         CustomerStateList: [],//获取行标题是否显示的数据   列的配置化对象，存储配置信息
         PersonChargeList: [],//获取负责人数据
         AllPersonChargeList: [],//获取客户所有数据反填
-        HumanResourcesList: []//获取人力资源管理获取数据
-
+        HumanResourcesList: [],//获取人力资源管理获取数据
+        Loglist: []//获取日志管理的数据反填
     },
     getters,
     actions,

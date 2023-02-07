@@ -53,6 +53,20 @@ export const ObtainSecondSelect = ({ commit }, data) => {
     });
 };
 
+
+//获取第三个下拉的数据
+export const ObtainthirtdSelect = ({ commit }, data) => {
+    return new Promise(() => {
+        axios.get(data).then((res) => {
+            commit('SET_THIRTD_ITEM', res.data);
+        });
+    });
+};
+
+
+
+
+
 //数据提交
 export const ConMitCustomerAdd = ({ commit }, data) => {
     return new Promise(() => {
@@ -177,12 +191,35 @@ export const loadHumanResourcesData = ({ commit }, data) => {
             },
         };
 
-        console.log(data);
+
         axios.get("https://localhost:5001/api/HumanResources/GetAll", Searth).then((res) => {
+            console.log(res.data);
             commit('SET_HumanResource_Info', res.data);
         });
     });
 };
+
+// 获取人力资源信息数据
+export const loadLoglistData = ({ commit }, data) => {
+    return new Promise(() => {
+        console.log(data);
+        var Searth = {
+            params: {
+                name: data.name,
+                pageindex: data.pageindex,
+                pagesize: data.pagedata,
+            },
+        };
+
+
+        axios.get("https://localhost:5001/api/Log/GetAll", Searth).then((res) => {
+            console.log(res.data);
+            commit('SET_LogList_Info', res.data);
+        });
+    });
+};
+
+
 
 
 

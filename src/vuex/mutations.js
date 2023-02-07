@@ -34,6 +34,12 @@ export const SET_FIRST_ITEM = (state, seckills) => {
 export const SET_SECOND_ITEM = (state, seckills) => {
     state.SecondSelectItem = seckills;
 };
+
+
+//获取第二个下拉框的数据
+export const SET_THIRTD_ITEM = (state, seckills) => {
+    state.ThirtdSelectItem = seckills;
+};
 //获取客户信息的数据
 export const SET_Customer_INFO = (state, seckills) => {
     state.CustomerList = [];
@@ -62,9 +68,22 @@ export const SET_PerSonRecoillist_INFO = (state, seckills) => {
     state.AllPersonChargeList = seckills;
 };
 
-//
+//获取人力资源管理的数据反填
 export const SET_HumanResource_Info = (state, seckills) => {
-    state.HumanResourcesList = seckills;
+    state.HumanResourcesList = [];
+    state.page.totalpage = seckills.PageSize;
+    state.page.total = seckills.PageCount;
+    state.HumanResourcesList = seckills.Data;
+
+
 };
+
+//获取日志管理的数据反填
+export const SET_LogList_Info = (state, seckills) => {
+    state.Loglist = [];
+    state.page.totalpage = seckills.PageSize;
+    state.page.total = seckills.PageCount;
+    state.Loglist = seckills.Data;
+}
 
 

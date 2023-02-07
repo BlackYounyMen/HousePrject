@@ -58,8 +58,8 @@
   </div>
 </template>
 <script>
-import RoleAdd from "../../components/System/DeptAdd.vue";
-import RoleEdit from "../../components/System/DeptEdit.vue";
+import RoleAdd from "@/components/System/DeptAdd.vue";
+import RoleEdit from "@/components/System/DeptEdit.vue";
 export default {
   components: { RoleAdd, RoleEdit },
   data() {
