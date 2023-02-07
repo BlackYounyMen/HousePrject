@@ -58,14 +58,15 @@
           {{ scope.row.SigningDate.substr(0, 10) }}
         </template>
       </el-table-column>
+      <el-table-column prop="SumMoney" label="实际总收" width="130">
+      </el-table-column>
       <el-table-column label="进度">
         <template slot-scope="scope">
           <el-progress
             :text-inside="true"
             :stroke-width="26"
-            :percentage="90"
+            :percentage="(scope.row.SumMoney / scope.row.ActualAmount) * 100"
           ></el-progress>
-          {{ scope.row }}
         </template>
       </el-table-column>
       <el-table-column prop="ProjectLeader" label="工程负责人">
@@ -88,10 +89,40 @@
     >
     </el-pagination>
     <!--分页结束-->
+    <!--这是弹窗的开始-->
+    <el-dialog
+      title="收费列表详细"
+      :visible.sync="addDid"
+      v-if="addDid"
+      width="30%"
+    >
+      <span>
+        <ChargeBoardAdd @Success="DigColse"></ChargeBoardAdd>
+      </span>
+      <span slot="footer"> </span>
+    </el-dialog>
+    <el-dialog
+      title="收费列表详细"
+      :visible.sync="EditDid"
+      v-if="EditDid"
+      width="30%"
+    >
+      <span>
+        <ChargeBoardShow :id="Fid" @Success="EditDigColse"></ChargeBoardShow>
+      </span>
+      <span slot="footer"> </span>
+    </el-dialog>
+
+    <!--这是弹窗的结束-->
   </div>
 </template>
+
+
 <script>
+import ChargeBoardAdd from "@/components/Contract/ChargeManage/ChargeBoardAdd.vue";
+import ChargeBoardShow from "@/components/Contract/ChargeManage/ChargeBoardShow.vue";
 export default {
+  components: { ChargeBoardAdd, ChargeBoardShow },
   data() {
     return {
       //查询条件
@@ -100,6 +131,8 @@ export default {
         starting: "",
         termination: "",
       },
+      EditDigColse: false,
+      DigColse: false,
       //列表数据
       tableData: [],
       //分页数据

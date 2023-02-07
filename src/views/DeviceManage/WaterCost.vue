@@ -166,6 +166,7 @@ export default {
     },
     //点击上一页|下一页数据发生改变
     handleCurrentChange(val) {
+      console.log(val);
       this.Searth.pageindex = val;
       this.loadWaterData(this.Searth);
       this.GaugeBasic();
@@ -221,7 +222,7 @@ export default {
 footer {
   height: 60px;
   line-height: 60px;
-  position: absolute;
+  position: fixed;
   margin: auto;
   left: 280px;
   right: 0;
