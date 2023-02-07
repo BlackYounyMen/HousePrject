@@ -46,7 +46,8 @@
     >
       <el-table-column prop="ContractId" label="合同编号" width="155">
       </el-table-column>
-      <el-table-column prop="ContractNum" label="合同名称"> </el-table-column>
+      <el-table-column prop="ContractName" label="合同名称" width="160">
+      </el-table-column>
       <el-table-column prop="ConstructionUnit" label="建设单位">
       </el-table-column>
       <el-table-column prop="OriginalAmount" label="合同额(万元)" width="130">
@@ -73,8 +74,13 @@
       </el-table-column>
       <el-table-column label="操作" width="250">
         <template slot-scope="scope">
-          <el-button type="warning">查看</el-button>
-          <el-button type="danger" @click="del(scope.row.Id)">收费</el-button>
+          <el-button type="warning" @click="SeeLook(scope.row)">查看</el-button>
+          <el-button
+            type="danger"
+            @click="Charge(scope.row)"
+            v-if="scope.row.SumMoney == scope.row.ActualAmount ? false : true"
+            >收费</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -92,23 +98,32 @@
     <!--这是弹窗的开始-->
     <el-dialog
       title="收费列表详细"
-      :visible.sync="addDid"
-      v-if="addDid"
-      width="30%"
+      :visible.sync="EditDid"
+      v-if="EditDid"
+      width="60%"
     >
       <span>
-        <ChargeBoardAdd @Success="DigColse"></ChargeBoardAdd>
+        <ChargeBoardShow
+          :id="fid"
+          :summoney="SumMoneyItem"
+          @Success="EditDigColse"
+        ></ChargeBoardShow>
       </span>
       <span slot="footer"> </span>
     </el-dialog>
     <el-dialog
-      title="收费列表详细"
-      :visible.sync="EditDid"
-      v-if="EditDid"
-      width="30%"
+      title="收费列表详细展示"
+      :visible.sync="addDid"
+      v-if="addDid"
+      width="60%"
     >
       <span>
-        <ChargeBoardShow :id="Fid" @Success="EditDigColse"></ChargeBoardShow>
+        <ChargeBoardAdd
+          :id="fid"
+          :name="fname"
+          :summoney="SumMoneyItem"
+          @Success="DigColse"
+        ></ChargeBoardAdd>
       </span>
       <span slot="footer"> </span>
     </el-dialog>
@@ -131,8 +146,8 @@ export default {
         starting: "",
         termination: "",
       },
-      EditDigColse: false,
-      DigColse: false,
+      addDid: false,
+      EditDid: false,
       //列表数据
       tableData: [],
       //分页数据
@@ -142,6 +157,9 @@ export default {
         totalCount: 0,
         totalPage: 0,
       },
+      fid: 0,
+      fname: "",
+      SumMoneyItem: 0,
     };
   },
 
@@ -182,8 +200,23 @@ export default {
     },
 
     //删除
-    del(id) {
-      console.log(id);
+    SeeLook(val) {
+      this.EditDid = true;
+      this.fid = val.Id;
+      this.SumMoneyItem = val.ActualAmount;
+    },
+    Charge(val) {
+      this.addDid = true;
+      this.fid = val.Id;
+      this.fname = val.ContractName;
+      this.SumMoneyItem = val.ActualAmount;
+    },
+    EditDigColse() {
+      this.EditDid = false;
+    },
+
+    DigColse() {
+      this.addDid = true;
     },
   },
 
@@ -193,4 +226,20 @@ export default {
 };
 </script>
 <style>
+.el-dialog {
+  display: flex;
+  flex-direction: column;
+  margin: 0 !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /*height:600px;*/
+  max-height: calc(100% - 200px);
+  max-width: calc(100% - 30px);
+}
+.el-dialog .el-dialog__body {
+  flex: 1;
+  overflow: auto;
+}
 </style>

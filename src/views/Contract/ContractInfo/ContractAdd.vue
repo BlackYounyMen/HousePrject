@@ -77,10 +77,10 @@
               <el-form-item
                 label="合同名称："
                 label-width="150px"
-                prop="contractNum"
+                prop="contractName"
               >
                 <el-input
-                  v-model="contractInfo.contractNum"
+                  v-model="contractInfo.contractName"
                   placeholder="请输入合同名称"
                 ></el-input>
               </el-form-item></div
@@ -394,16 +394,16 @@ export default {
           { required: true, message: "请输入合同编号", trigger: "blur" },
         ],
         contractNum: [
-          { required: true, message: "请输入合同名称", trigger: "blur" },
+          { required: true, message: "请输入合同文本名称", trigger: "blur" },
         ],
         contractName: [
-          { required: true, message: "请输入建设单位", trigger: "blur" },
+          { required: true, message: "请输入合同名称", trigger: "blur" },
         ],
         constructionUnit: [
-          { required: true, message: "请输入工程负责人", trigger: "blur" },
+          { required: true, message: "请输入建设单位", trigger: "blur" },
         ],
         projectLeader: [
-          { required: true, message: "请输入工程负责人电话", trigger: "blur" },
+          { required: true, message: "请输入工程负责人", trigger: "blur" },
         ],
         phone: [
           {
