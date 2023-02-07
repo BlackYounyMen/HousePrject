@@ -46,7 +46,7 @@
     >
       <el-table-column prop="ContractId" label="合同编号" width="155">
       </el-table-column>
-      <el-table-column prop="ContractNum" label="合同名称"> </el-table-column>
+      <el-table-column prop="ContractName" label="合同名称"> </el-table-column>
       <el-table-column prop="ConstructionUnit" label="建设单位">
       </el-table-column>
       <el-table-column prop="OriginalAmount" label="合同额(万元)" width="130">

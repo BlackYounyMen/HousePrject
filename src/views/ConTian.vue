@@ -106,19 +106,19 @@
       </el-container>
     </el-container>
 
-    <footer>
-      <!--分页开始-->
-      <el-button
+    <!-- <footer> -->
+    <!--分页开始-->
+    <!-- <el-button
         type="primary"
         icon="el-icon-share"
         size="default"
         style="float: right; margin-right: 3%"
         round
         >前往新版</el-button
-      >
+      > -->
 
-      <!--分页结束-->
-    </footer>
+    <!--分页结束-->
+    <!-- </footer> -->
   </div>
 </template>
 <script>
@@ -156,9 +156,10 @@ export default {
       this.$router.push("/ConTian");
     },
   },
-  created() {
+  mounted() {
     var userid = localStorage.getItem("UserInfo");
     this.HeadIcon = JSON.parse(userid).HandIcon;
+    console.log(111);
     this.GetMenu();
     this.IsLogin();
   },
