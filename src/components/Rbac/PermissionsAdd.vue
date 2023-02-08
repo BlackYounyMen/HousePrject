@@ -8,6 +8,7 @@
         <el-select
           v-model="sizeForm.superiorId"
           placeholder="请选择在哪个权限内"
+          filterable 
         >
           <el-option
             v-for="val in Selectitem"
