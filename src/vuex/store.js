@@ -25,7 +25,8 @@ export default new Vuex.Store({
         PersonChargeList: [],//获取负责人数据
         AllPersonChargeList: [],//获取客户所有数据反填
         HumanResourcesList: [],//获取人力资源管理获取数据
-        Loglist: []//获取日志管理的数据反填
+        Loglist: [],//获取日志管理的数据反填
+        AnnouncementList: []//获取公告数据
     },
     getters,
     actions,

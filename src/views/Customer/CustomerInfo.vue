@@ -8,7 +8,7 @@
             style="width: 300px"
           ></el-input></div
       ></el-col>
-      <el-col :span="10"
+      <el-col :span="8"
         ><div class="grid-content bg-purple-light">
           录入时间
           <el-date-picker
@@ -28,11 +28,13 @@
           >
           </el-date-picker></div
       ></el-col>
-      <el-col :span="2"
-        ><div class="grid-content bg-purple"></div>
-        <el-button type="primary" size="default" @click="Load()"
+      <el-col :span="4"
+        ><div class="grid-content bg-purple">
+            <el-button type="primary" size="default" @click="Load()"
           >查询</el-button
         >
+        </div>
+      
       </el-col>
       <el-col :span="6"
         ><div class="grid-content bg-purple-light">

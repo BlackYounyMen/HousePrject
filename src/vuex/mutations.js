@@ -84,6 +84,14 @@ export const SET_LogList_Info = (state, seckills) => {
     state.page.totalpage = seckills.PageSize;
     state.page.total = seckills.PageCount;
     state.Loglist = seckills.Data;
+};
+
+//获取公告管理的数据反填
+export const SET_AnnouncementList_Info = (state, seckills) => {
+    state.AnnouncementList = [];
+    state.page.totalpage = seckills.PageSize;
+    state.page.total = seckills.PageCount;
+    state.AnnouncementList = seckills.Data;
 }
 
 
