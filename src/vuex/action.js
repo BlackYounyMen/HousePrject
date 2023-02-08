@@ -220,6 +220,25 @@ export const loadLoglistData = ({ commit }, data) => {
 };
 
 
+// 获取公告信息数据
+export const loadAnnouncementListData = ({ commit }, data) => {
+    return new Promise(() => {
+        console.log(data);
+        var Searth = {
+            params: {
+                name: data.name,
+                pageindex: data.pageindex,
+                pagesize: data.pagedata,
+            },
+        };
+        axios.get("https://localhost:5001/api/Notice/GetAll", Searth).then((res) => {
+            console.log(res.data);
+            commit('SET_AnnouncementList_Info', res.data);
+        });
+    });
+};
+
+
 
 
 
