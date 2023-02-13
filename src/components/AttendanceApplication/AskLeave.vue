@@ -1,11 +1,17 @@
-<template lang="">
-    <div>
-        <!--请假申请-->
-        请假申请
-    </div>
+<template  >
+  <div>
+    <!--请假申请-->
+    请假申请单
+  </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {},
+};
 </script>
-<style lang="">
+<style  >
 </style>
