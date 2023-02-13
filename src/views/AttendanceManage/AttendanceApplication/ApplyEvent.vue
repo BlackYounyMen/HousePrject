@@ -1,6 +1,6 @@
 <template  >
   <div>
-    <div style="width: 80%">
+    <div style="width: 100%">
       <table>
         <tr>
           <td>申请类型</td>
@@ -14,9 +14,18 @@
         </tr>
         <tr>
           <td colspan="2">
-            <AskLeave v-if="show[0]"></AskLeave>
-            <FieldWork v-if="show[1]"></FieldWork>
-            <OnBusiness v-if="show[2]"></OnBusiness>
+            <AskLeave
+              v-if="show[0]"
+              @change="costPlannedAmountChange($event)"
+            ></AskLeave>
+            <FieldWork
+              v-if="show[1]"
+              @change="costPlannedAmountChange1($event)"
+            ></FieldWork>
+            <OnBusiness
+              v-if="show[2]"
+              @change="costPlannedAmountChange2($event)"
+            ></OnBusiness>
           </td>
         </tr>
       </table>
@@ -52,6 +61,18 @@ export default {
       if (value == "出差") {
         this.show = [false, false, true];
       }
+    },
+    costPlannedAmountChange(value) {
+      this.show = [value, false, false];
+      this.$emit("change", value);
+    },
+    costPlannedAmountChange1(value) {
+      this.show = [false, value, false];
+      this.$emit("change", value);
+    },
+    costPlannedAmountChange2(value) {
+      this.show = [false, false, value];
+      this.$emit("change", value);
     },
   },
 };

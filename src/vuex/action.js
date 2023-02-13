@@ -27,6 +27,64 @@ export const loadWaterData = ({ commit }, data) => {
         });
     });
 };
+
+// 获取消防门数据
+export const loadFireDoorData = ({ commit }, data) => {
+    return new Promise(() => {
+        var Searth = {
+            params: {
+                building: data.building,
+                unitnum: data.unitnum,
+                state: data.state,
+                pageindex: data.pageindex,
+                pagesize: data.pagesize,
+            },
+        };
+        axios.get("https://localhost:5001/api/Device/FireGetData", Searth).then((res) => {
+
+            commit('SET_FireDoor_INFO', res.data);
+        });
+    });
+};
+
+// 获取消防风机数据
+export const loadFanData = ({ commit }, data) => {
+    return new Promise(() => {
+        var Searth = {
+            params: {
+                building: data.building,
+                unitnum: data.unitnum,
+                state: data.state,
+                pageindex: data.pageindex,
+                pagesize: data.pagesize,
+            },
+        };
+        axios.get("https://localhost:5001/api/Device/FanGetData", Searth).then((res) => {
+
+            commit('SET_Fan_INFO', res.data);
+        });
+    });
+};
+
+// 获取电数据
+export const loadElectricMeterData = ({ commit }, data) => {
+    return new Promise(() => {
+        var Searth = {
+            params: {
+                building: data.building,
+                unitnum: data.unitnum,
+                state: data.state,
+                pageindex: data.pageindex,
+                pagesize: data.pagesize,
+            },
+        };
+        axios.get("https://localhost:5001/api/Device/ElectricGetData", Searth).then((res) => {
+
+            commit('SET_ElectricMeter_INFO', res.data);
+        });
+    });
+};
+
 // 获取水表数据
 export const EditState = ({ commit }, data) => {
     return new Promise(() => {
@@ -238,8 +296,56 @@ export const loadAnnouncementListData = ({ commit }, data) => {
     });
 };
 
+// 获取请假信息数据
+export const loadasklistData = ({ commit }, data) => {
+    return new Promise(() => {
+        console.log(data);
+        var Searth = {
+            params: {
+                name: data.name,
+                pageindex: data.pageindex,
+                pagesize: data.pagedata,
+            },
+        };
+        axios.get("https://localhost:5001/api/AttendanceCommit/leaveGetAll", Searth).then((res) => {
+            console.log(res.data);
+            commit('SET_asklist_Info', res.data);
+        });
+    });
+};
 
+// 获取外勤信息数据
+export const loadFiekdworklistData = ({ commit }, data) => {
+    return new Promise(() => {
+        console.log(data);
+        var Searth = {
+            params: {
+                name: data.name,
+                pageindex: data.pageindex,
+                pagesize: data.pagedata,
+            },
+        };
+        axios.get("https://localhost:5001/api/AttendanceCommit/OutWorkGetAll", Searth).then((res) => {
+            console.log(res.data);
+            commit('SET_Fiekdworklist_Info', res.data);
+        });
+    });
+};
 
-
-
-
+// 获取出差信息数据
+export const loadOnBusinesslistData = ({ commit }, data) => {
+    return new Promise(() => {
+        console.log(data);
+        var Searth = {
+            params: {
+                name: data.name,
+                pageindex: data.pageindex,
+                pagesize: data.pagedata,
+            },
+        };
+        axios.get("https://localhost:5001/api/AttendanceCommit/GetAll", Searth).then((res) => {
+            console.log(res.data);
+            commit('SET_OnBusinesslist_Info', res.data);
+        });
+    });
+};

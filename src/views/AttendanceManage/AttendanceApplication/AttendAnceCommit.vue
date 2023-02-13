@@ -25,9 +25,13 @@
     </el-calendar>
 
     <!--这是弹窗的开始-->
-    <el-dialog :visible.sync="addDid" v-if="addDid" width="80%">
+    <el-dialog :visible.sync="addDid" v-if="addDid" width="50%">
       <span>
-        <ApplyEvent :datetime="datetime" @Success="DigColse"></ApplyEvent>
+        <ApplyEvent
+          :datetime="datetime"
+          @Success="DigColse"
+          @change="costPlannedAmountChange($event)"
+        ></ApplyEvent>
       </span>
       <span slot="footer"> </span>
     </el-dialog>
@@ -76,6 +80,11 @@ export default {
     this.month = new Date(this.value).getMonth() + 1;
   },
   methods: {
+    costPlannedAmountChange(value) {
+      if (value == false) {
+        this.addDid = false;
+      }
+    },
     changeHandle() {
       // 这里实现了下拉框 控制 日历内容功能
       this.value = `${this.year}-${this.month}`;
