@@ -126,17 +126,17 @@ export default {
     DigColse() {
       this.$message.success("添加成功");
       this.addDid = false;
-      this.GetAll();
+      this.loadLoglistData();
     },
     //修改弹框关闭
     EditDigColse() {
       this.$message.success("修改成功");
       this.EditDid = false;
-      this.GetAll();
+      this.loadLoglistData();
     },
     DigPlan() {
       this.PlanDid = false;
-      this.GetAll();
+      this.loadLoglistData();
     },
   },
   mounted() {
