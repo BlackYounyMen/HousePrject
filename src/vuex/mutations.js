@@ -94,4 +94,94 @@ export const SET_AnnouncementList_Info = (state, seckills) => {
     state.AnnouncementList = seckills.Data;
 }
 
+//获取请假管理的数据
+export const SET_asklist_Info = (state, seckills) => {
+    state.asklist = [];
+    state.page.totalpage = seckills.PageSize;
+    state.page.total = seckills.PageCount;
+    state.asklist = seckills.Data;
+}
+
+//获取外勤管理的数据
+export const SET_Fiekdworklist_Info = (state, seckills) => {
+    state.Fiekdworklist = [];
+    state.page.totalpage = seckills.PageSize;
+    state.page.total = seckills.PageCount;
+    state.Fiekdworklist = seckills.Data;
+}
+
+//获取出差的数据
+export const SET_OnBusinesslist_Info = (state, seckills) => {
+    state.OnBusinesslist = [];
+    state.page.totalpage = seckills.PageSize;
+    state.page.total = seckills.PageCount;
+    state.OnBusinesslist = seckills.Data;
+}
+
+//获取消防门的数据
+
+export const SET_FireDoor_INFO = (state, seckills) => {
+
+    state.FireDoorlist = [];
+
+
+
+    var list = [];
+    let len = seckills.Data.length;
+    let n = 6; //假设每行显示4个
+    let lineNum = len % 6 === 0 ? len / 6 : Math.floor(len / 6 + 1);
+    for (let i = 0; i < lineNum; i++) {
+        // slice() 方法返回一个从开始到结束（不包括结束）选择的数组的一部分浅拷贝到一个新数组对象。且原始数组不会被修改。
+        let temp = seckills.Data.slice(i * n, i * n + n);
+        list.push(temp);
+    }
+
+
+    state.page.totalpage = seckills.PageSize;
+    state.page.total = seckills.PageCount;
+    state.FireDoorlist = list;
+}
+
+export const SET_Fan_INFO = (state, seckills) => {
+
+    state.Fanlist = [];
+
+
+
+    var list = [];
+    let len = seckills.Data.length;
+    let n = 6; //假设每行显示4个
+    let lineNum = len % 6 === 0 ? len / 6 : Math.floor(len / 6 + 1);
+    for (let i = 0; i < lineNum; i++) {
+        // slice() 方法返回一个从开始到结束（不包括结束）选择的数组的一部分浅拷贝到一个新数组对象。且原始数组不会被修改。
+        let temp = seckills.Data.slice(i * n, i * n + n);
+        list.push(temp);
+    }
+
+
+    state.page.totalpage = seckills.PageSize;
+    state.page.total = seckills.PageCount;
+    state.Fanlist = list;
+}
+
+export const SET_ElectricMeter_INFO = (state, seckills) => {
+
+    state.ElectricMeterlist = [];
+    state.DeviveItem = seckills.Data;
+    var list = [];
+    let len = seckills.Data.length;
+    let n = 6; //假设每行显示4个
+    let lineNum = len % 6 === 0 ? len / 6 : Math.floor(len / 6 + 1);
+    for (let i = 0; i < lineNum; i++) {
+        // slice() 方法返回一个从开始到结束（不包括结束）选择的数组的一部分浅拷贝到一个新数组对象。且原始数组不会被修改。
+        let temp = seckills.Data.slice(i * n, i * n + n);
+        list.push(temp);
+    }
+
+
+    state.page.totalpage = seckills.PageCount;
+    state.page.total = seckills.PageSize;
+    state.ElectricMeterlist = list;
+
+}
 
