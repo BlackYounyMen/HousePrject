@@ -15,10 +15,11 @@
     </div>
     <el-calendar v-model="value">
       <template slot="dateCell" slot-scope="{ date }">
-        <p>{{ new Date(date).getDate() }}</p>
-
+        <p>{{ date | timeshow }}</p>
+        <!-- new Date(date).getDate()-->
         <!-- 这里加载出的每个日期最外层是一个盒子  这里设置的什么标签  盒子里面就是什么标签 -->
         <span v-if="getDay(date)" style="background: red; color: #fff">休</span>
+        <span v-else-if="getDay1(date)" style="color: red">休息</span>
         <span v-else style="color: blue" @click="GetValue(date)">申请</span>
         <p v-if="checkDay(date)" style="color: skyblue">清明</p>
       </template>
@@ -41,6 +42,8 @@
 </template>
 <script>
 import ApplyEvent from "@/views/AttendanceManage/AttendanceApplication/ApplyEvent.vue";
+import { ReturnDate } from "@/Utils/Date";
+let that;
 export default {
   components: { ApplyEvent },
   // name: "Calendar",
@@ -52,7 +55,15 @@ export default {
       month: new Date().getMonth() + 1,
       addDid: false,
       datetime: "",
+      datelist: [],
     };
+  },
+
+  mounted() {
+    this.DataShow();
+  },
+  beforeCreate: function () {
+    that = this;
   },
   computed: {},
   created() {
@@ -80,6 +91,14 @@ export default {
     this.month = new Date(this.value).getMonth() + 1;
   },
   methods: {
+    DataShow() {
+      //获取他的数据
+      this.axios
+        .get(`https://localhost:5001/api/Holiday/GetData`)
+        .then((res) => {
+          this.datetime = res.data.Data;
+        });
+    },
     costPlannedAmountChange(value) {
       if (value == false) {
         this.addDid = false;
@@ -100,6 +119,17 @@ export default {
       }
       // console.log(day, 7777777)
     },
+    getDay1(t) {
+      //  在 scoped-slot 可以获取到 date（当前单元格的日期）
+      // console.log(t, 888888)
+      var d = ReturnDate(t);
+      for (let a of that.datetime) {
+        if (d == a.HolidayTime.substring(0, 10)) {
+          return true;
+        }
+      }
+      return false;
+    },
     checkDay(t) {
       const y = t.getFullYear();
       const m = t.getMonth() + 1;
@@ -110,15 +140,18 @@ export default {
       return false;
     },
     GetValue(t) {
-      console.log(t);
-      const y = t.getFullYear();
-      const m = t.getMonth() + 1;
-      const d = t.getDate();
       this.addDid = true;
-      this.datetime = `${y}-${m}-${d}`;
+      var d = ReturnDate(t);
+      this.datetime = d;
     },
     DigColse() {
       this.addDid = false;
+    },
+  },
+  filters: {
+    timeshow: function (t) {
+      var d = ReturnDate(t);
+      return d;
     },
   },
 };

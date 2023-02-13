@@ -54,6 +54,7 @@
                     v-if="itemChild.children && itemChild.children.length"
                     :index="itemChild.path"
                     :key="itemChild.path"
+                    v-show="itemChild.display"
                   >
                     <template slot="title"
                       ><i :class="itemChild.icon"></i

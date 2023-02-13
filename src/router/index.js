@@ -18,6 +18,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
 router.beforeEach((to, from, next) => {
   var userid = localStorage.getItem("UserInfo");
   if (to.name !== 'home' && userid == null) {
