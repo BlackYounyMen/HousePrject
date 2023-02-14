@@ -185,3 +185,10 @@ export const SET_ElectricMeter_INFO = (state, seckills) => {
 
 }
 
+//获取出差的数据
+export const SET_Loginlist_Info = (state, seckills) => {
+    state.Loginlist = [];
+    state.page.totalpage = seckills.PageSize;
+    state.page.total = seckills.PageCount;
+    state.Loginlist = seckills.Data;
+}

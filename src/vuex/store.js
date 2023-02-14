@@ -33,6 +33,7 @@ export default new Vuex.Store({
         FireDoorlist: [],//获取消防门数据
         Fanlist: [],//获取消防风机
         ElectricMeterlist: [],//获取电数据
+        Loginlist: [],//获取登录日志数据
     },
     getters,
     actions,

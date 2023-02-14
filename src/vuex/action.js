@@ -349,3 +349,21 @@ export const loadOnBusinesslistData = ({ commit }, data) => {
         });
     });
 };
+
+// 获取登录日志信息数据
+export const loadLoginlistData = ({ commit }, data) => {
+    return new Promise(() => {
+        console.log(data);
+        var Searth = {
+            params: {
+                name: data.name,
+                pageindex: data.pageindex,
+                pagesize: data.pagedata,
+            },
+        };
+        axios.get("https://localhost:5001/api/Login/GetAll", Searth).then((res) => {
+
+            commit('SET_Loginlist_Info', res.data);
+        });
+    });
+};
