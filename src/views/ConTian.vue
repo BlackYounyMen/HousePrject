@@ -54,7 +54,6 @@
                     v-if="itemChild.children && itemChild.children.length"
                     :index="itemChild.path"
                     :key="itemChild.path"
-                    v-show="itemChild.display"
                   >
                     <template slot="title"
                       ><i :class="itemChild.icon"></i
@@ -160,7 +159,6 @@ export default {
   mounted() {
     var userid = localStorage.getItem("UserInfo");
     this.HeadIcon = JSON.parse(userid).HandIcon;
-    console.log(111);
     this.GetMenu();
     this.IsLogin();
   },
