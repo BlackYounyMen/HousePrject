@@ -93,8 +93,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.form.holidayTime = this.myGetTime(this.form.holidayTime);
-
       this.axios
         .post(`https://localhost:5001/api/Holiday/CreateAdd`, this.form)
         .then((res) => {
@@ -122,6 +120,7 @@ export default {
         });
     },
     myGetTime(time) {
+      console.log(time);
       let yy = time.getFullYear();
       let mm = time.getMonth() + 1;
       let dd = time.getDate();

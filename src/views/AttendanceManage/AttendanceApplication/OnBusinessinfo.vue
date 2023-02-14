@@ -3,7 +3,7 @@
     <el-table :data="OnBusinesslist" border style="width: 100%">
       <el-table-column prop="ProjectName" label="项目名称/事由：">
       </el-table-column>
-      <el-table-column prop="Place" label="出差地点"> </el-table-column>
+      <el-table-column prop="TravelPlace" label="出差地点"> </el-table-column>
       <el-table-column prop="StartTime" label="开始时间">
         <template slot-scope="scope">
           {{ scope.row.StartTime.substring(0, 10) }}
