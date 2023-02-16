@@ -27,12 +27,15 @@
         <!--表头结束-->
       </el-header>
       <el-container>
-        <el-aside width="275px">
+        <el-aside :width="isCollapse ? '64px' : '200px'">
+          <div class="toggle-button" @click="toggleCollapse">|||</div>
           <!--左侧菜单栏显示-->
           <el-menu
             default-active="1"
             background-color="#545c64"
             text-color="#fff"
+            :collapse="isCollapse"
+            :collapse-transition="false"
             active-text-color="#ffd04b"
             :router="true"
           >
@@ -108,14 +111,19 @@
 
     <!-- <footer> -->
     <!--分页开始-->
-    <!-- <el-button
+
+    <div class="d2">
+      <el-button
+        class="btn1"
         type="primary"
         icon="el-icon-share"
         size="default"
         style="float: right; margin-right: 3%"
+        @click="toggleCollapse1"
         round
         >前往新版</el-button
-      > -->
+      >
+    </div>
 
     <!--分页结束-->
     <!-- </footer> -->
@@ -123,11 +131,13 @@
 </template>
 <script>
 import { getChildrenPath } from "@/router/indexUtil";
+
 export default {
   data() {
     return {
       list: [],
       HeadIcon: "",
+      isCollapse: false,
     };
   },
   methods: {
@@ -138,7 +148,26 @@ export default {
         getChildrenPath(userid);
       }
     },
-
+    toggleCollapse() {
+      this.isCollapse = !this.isCollapse;
+    },
+    toggleCollapse1() {
+      if (this.isCollapse == false) {
+        this.$router.push("/ConTian");
+        this.$message({
+          message: "成功前往新版本",
+          type: "success",
+        });
+        this.isCollapse = true;
+      } else {
+        this.$router.push("/ConTian");
+        this.$message({
+          message: "成功返回旧版本",
+          type: "success",
+        });
+        this.isCollapse = false;
+      }
+    },
     GetMenu() {
       var userid = localStorage.getItem("UserInfo");
       userid = JSON.parse(userid).Id;
@@ -165,6 +194,19 @@ export default {
 };
 </script>
 <style >
+.d2 {
+  min-width: 100%;
+  height: 40px;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+.btn1 {
+  position: relative;
+  right: 10px;
+  top: 10px;
+}
+
 .el-header,
 .el-footer {
   background-color: #b3c0d1;
@@ -211,5 +253,15 @@ footer {
   bottom: 0;
   top: 800px;
   right: 5px;
+}
+
+.toggle-button {
+  background-color: rgb(84, 92, 100);
+  font-size: 10px;
+  line-height: 24px;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.2em;
+  cursor: pointer;
 }
 </style>
