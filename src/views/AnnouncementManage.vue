@@ -47,7 +47,7 @@
       </span>
       <span slot="footer"> </span>
     </el-dialog>
-    <el-dialog title="修改" :visible.sync="EditDid" v-if="EditDid" width="30%">
+    <el-dialog title="查看" :visible.sync="EditDid" v-if="EditDid" width="30%">
       <span>
         <RoleEdit :id="Fid" @Success="EditDigColse"></RoleEdit>
       </span>

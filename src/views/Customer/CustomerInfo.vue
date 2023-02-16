@@ -1,57 +1,53 @@
 <template>
   <div id="app">
-    <el-row>
-      <el-col :span="6"
-        ><div class="grid-content bg-purple" style="float: left">
-          生产部门:<el-input
-            v-model="searth.name"
-            style="width: 300px"
-          ></el-input></div
-      ></el-col>
-      <el-col :span="8"
-        ><div class="grid-content bg-purple-light">
-          录入时间
-          <el-date-picker
-            v-model="searth.sdate"
-            type="date"
-            placeholder="选择日期"
-            style="width: 300px"
-          >
-          </el-date-picker>
-
-          至:
-          <el-date-picker
-            v-model="searth.odate"
-            type="date"
-            placeholder="选择日期"
-            style="width: 300px"
-          >
-          </el-date-picker></div
-      ></el-col>
-      <el-col :span="4"
-        ><div class="grid-content bg-purple">
-            <el-button type="primary" size="default" @click="Load()"
+    <el-form :inline="true" :model="searth" class="demo-form-inline">
+      <el-form-item label="合同名称：">
+        <el-input v-model="searth.name" placeholder="合同名称"></el-input>
+      </el-form-item>
+      <el-form-item label="录入时间">
+        <el-row>
+          <el-col :span="10"
+            ><div class="grid-content bg-purple">
+              <el-date-picker
+                v-model="searth.sdate"
+                type="date"
+                placeholder="选择日期"
+                style="width: 300px"
+              >
+              </el-date-picker></div
+          ></el-col>
+          <el-col class="line" :span="2">—</el-col>
+          <el-col :span="10"
+            ><div class="grid-content bg-purple-light">
+              <el-date-picker
+                v-model="searth.odate"
+                type="date"
+                placeholder="选择日期"
+                style="width: 300px"
+              >
+              </el-date-picker></div
+          ></el-col>
+        </el-row>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" size="default" @click="Load()"
           >查询</el-button
         >
-        </div>
-      
-      </el-col>
-      <el-col :span="6"
-        ><div class="grid-content bg-purple-light">
-          <a
-            href="https://localhost:5001/api/Customerinfo/NpoiExportExcel"
-            style="
-              width: 180px;
-              height: 60px;
-              background-color: #98c0e4;
-              color: white;
-              font-size: 20px;
-            "
-            >导出数据</a
-          >
-        </div></el-col
-      >
-    </el-row>
+
+        <a
+          href="https://localhost:5001/api/Customerinfo/NpoiExportExcel"
+          style="
+            width: 180px;
+            height: 60px;
+            background-color: #98c0e4;
+            color: white;
+            font-size: 20px;
+          "
+          >导出数据</a
+        >
+      </el-form-item>
+    </el-form>
+
     <el-table
       :data="CustomerList"
       border

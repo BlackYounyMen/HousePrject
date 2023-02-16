@@ -6,7 +6,6 @@
           <el-input v-model="name" placeholder="姓名"></el-input>
         </el-form-item>
         <el-button type="primary" @click="getsearch()">查询</el-button>
-        <el-button type="primary" @click="DigOpen()">添加</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -54,16 +53,6 @@
       </el-table-column>
       <el-table-column prop="DeptId" label="任职部门" width="120">
       </el-table-column>
-      <el-table-column fixed="right" label="操作" width="100">
-        <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small"
-            >查看</el-button
-          >
-          <el-button type="text" size="small" @click="Edit(scope.row)"
-            >编辑</el-button
-          >
-        </template>
-      </el-table-column>
     </el-table>
     <el-pagination
       @size-change="handleSizeChange"
@@ -100,7 +89,7 @@ export default {
       name: "",
       pages: {
         pageindex: 1,
-        pagedata: 1,
+        pagedata: 10,
       },
       addDid: false,
       EditDid: false,
