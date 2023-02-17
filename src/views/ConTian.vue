@@ -115,11 +115,12 @@
     <div class="d2">
       <el-button
         class="btn1"
+        ref="btn1"
         type="primary"
         icon="el-icon-share"
         size="default"
         style="float: right; margin-right: 3%"
-        @click="toggleCollapse1"
+        @click="toggleCollapse1($event)"
         round
         >前往新版</el-button
       >
@@ -133,11 +134,13 @@
 import { getChildrenPath } from "@/router/indexUtil";
 
 export default {
+  name: "flowDetail",
   data() {
     return {
       list: [],
       HeadIcon: "",
       isCollapse: false,
+      stuname: "前往旧版",
     };
   },
   methods: {
@@ -152,6 +155,10 @@ export default {
       this.isCollapse = !this.isCollapse;
     },
     toggleCollapse1() {
+      var name = this.stuname;
+      this.stuname = this.$refs.btn1.$el.innerText;
+      //this.$refs.btn1是取上面id为btn1的元素（说id是不严谨的）
+      this.$refs.btn1.$el.innerText = name;
       if (this.isCollapse == false) {
         this.$router.push("/ConTian");
         this.$message({
@@ -202,8 +209,8 @@ export default {
   justify-content: flex-end;
 }
 .btn1 {
-  position: relative;
-  right: 10px;
+  position: fixed;
+  right: 300px;
   top: 10px;
 }
 
