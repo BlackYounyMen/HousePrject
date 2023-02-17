@@ -44,10 +44,24 @@
     >
     </el-pagination>
     <!--分页结束-->
+    <el-dialog
+      title="考勤统计查看"
+      :visible.sync="EditDid"
+      v-if="EditDid"
+      width="90%"
+    >
+      <span>
+        <RoleEdit :id="Fid" @Success="EditDigColse"></RoleEdit>
+      </span>
+      <span slot="footer"> </span>
+    </el-dialog>
   </div>
 </template>
+
 <script>
+import RoleEdit from "@/components/AttenDance";
 export default {
+  components: { RoleEdit },
   data() {
     return {
       Name: "",
@@ -93,7 +107,7 @@ export default {
 
     Edit(val) {
       this.Fid = val.Id;
-      this.$router.push("/ConTian");
+      this.EditDid = true;
     },
 
     //多选
@@ -204,3 +218,21 @@ export default {
   },
 };
 </script>
+<style>
+.el-dialog {
+  display: flex;
+  flex-direction: column;
+  margin: 0 !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /*height:600px;*/
+  max-height: calc(100% - 200px);
+  max-width: calc(100% - 30px);
+}
+.el-dialog .el-dialog__body {
+  flex: 1;
+  overflow: auto;
+}
+</style>

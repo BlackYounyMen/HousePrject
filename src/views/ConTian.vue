@@ -140,7 +140,7 @@ export default {
       list: [],
       HeadIcon: "",
       isCollapse: false,
-      stuname: "前往旧版",
+      stuname: "返回旧版",
     };
   },
   methods: {
