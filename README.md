@@ -1,5 +1,8 @@
 # houseprject
 
+this is my real estate project ,the project is used element—ui vue is used and front end's Display is finish ， 
+parent-child component and vuex is used，Most of the pages of this project use pop-up windows.html is used .
+
 ## Project setup
 ```
 npm install
@@ -10,7 +13,7 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compiles and minifies for production 展示
 ```
 npm run build
 ```
