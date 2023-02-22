@@ -45,7 +45,7 @@
 import store from "@/vuex/store";
 import { mapActions, mapState } from "vuex";
 import { getChildrenPath } from "@/router/indexUtil";
-
+import { getBrowserInfo } from "@/Utils/SystemBrowser";
 export default {
   data() {
     return {
@@ -74,6 +74,8 @@ export default {
       this.$refs.LoginFrom.style.transform = "none";
     },
     Login() {
+      var browserName = getBrowserInfo();
+      console.log(browserName);
       var token = {
         params: {
           account: this.account,
